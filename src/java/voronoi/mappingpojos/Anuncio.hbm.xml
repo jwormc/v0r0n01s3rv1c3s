@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-abr-2013 18:10:42 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="voronoi.mappingpojos.Anuncio" table="anuncio" catalog="directel_2012">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="parent" type="int">
+            <column name="parent" not-null="true" />
+        </property>
+        <property name="horario" type="string">
+            <column name="horario" length="65535" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="cliente" type="int">
+            <column name="cliente" not-null="true" />
+        </property>
+        <property name="logo" type="string">
+            <column name="logo" length="100" not-null="true" />
+        </property>
+        <property name="rating" type="int">
+            <column name="rating" not-null="true" />
+        </property>
+        <property name="shortD" type="string">
+            <column name="shortD" length="70" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65535" not-null="true" />
+        </property>
+        <property name="calle" type="string">
+            <column name="calle" length="100" not-null="true" />
+        </property>
+        <property name="numero" type="string">
+            <column name="numero" length="20" not-null="true" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="200" not-null="true" />
+        </property>
+        <property name="interior" type="string">
+            <column name="interior" length="8" not-null="true" />
+        </property>
+        <property name="colonia" type="string">
+            <column name="colonia" length="100" not-null="true" />
+        </property>
+        <property name="cp" type="java.lang.Integer">
+            <column name="cp" />
+        </property>
+        <property name="ciudad" type="string">
+            <column name="ciudad" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="5" not-null="true" />
+        </property>
+        <property name="pais" type="string">
+            <column name="pais" length="5" not-null="true" />
+        </property>
+        <property name="coordenadas" type="string">
+            <column name="coordenadas" length="200" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="65535" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="200" not-null="true" />
+        </property>
+        <property name="www" type="string">
+            <column name="www" length="65535" not-null="true" />
+        </property>
+        <property name="pagos" type="string">
+            <column name="pagos" length="65535" not-null="true" />
+        </property>
+        <property name="comentarios" type="int">
+            <column name="comentarios" not-null="true" />
+        </property>
+        <property name="extras" type="string">
+            <column name="extras" length="65535" not-null="true" />
+        </property>
+        <property name="etiquetas" type="string">
+            <column name="etiquetas" length="65535" not-null="true" />
+        </property>
+        <property name="aprobado" type="int">
+            <column name="aprobado" not-null="true" />
+        </property>
+        <property name="notas" type="string">
+            <column name="notas" length="65535" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -3,9 +3,13 @@
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
-    <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/sample</property>
-    <property name="hibernate.connection.username">app</property>
-    <property name="hibernate.connection.password">app</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://54.244.225.80:3306/directel_2012</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">admin</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
+    <mapping resource="voronoi/mappingpojos/Anuncio.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
