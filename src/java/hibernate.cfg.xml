@@ -11,5 +11,6 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
     <mapping resource="voronoi/mappingpojos/Anuncio.hbm.xml"/>
+    <mapping resource="voronoi/mappingpojos/Estados.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

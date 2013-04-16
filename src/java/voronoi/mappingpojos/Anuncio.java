@@ -1,5 +1,5 @@
 package voronoi.mappingpojos;
-// Generated 12-abr-2013 18:10:41 by Hibernate Tools 3.2.1.GA
+// Generated 15-abr-2013 14:16:16 by Hibernate Tools 3.2.1.GA
 
 
 

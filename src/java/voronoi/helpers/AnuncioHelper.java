@@ -23,18 +23,32 @@ public class AnuncioHelper {
     }
     
     public List getAnuncioByID(int id){
-    List<Anuncio> actorList = null;
+    List<Anuncio> anuncios = null;
     try {
         org.hibernate.Transaction tx = session.beginTransaction();
         Query q = session.createQuery ("from Anuncio where id="+id);
-        actorList = (List<Anuncio>) q.list();
+        anuncios = (List<Anuncio>) q.list();
 
     } catch (Exception e) {
         e.printStackTrace();
     }
 
-    return actorList;
+    return anuncios;
 }
     
+    
+        public List getAnunciosByREGEX(String cadena){
+    List<Anuncio> anuncios = null;
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        Query q = session.createQuery ("from Anuncio where id < 100 AND  etiquetas like '%"+cadena+"%'  ");
+        anuncios = (List<Anuncio>) q.list();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return anuncios;
+}
     
 }

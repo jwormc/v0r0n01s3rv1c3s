@@ -5,9 +5,10 @@
 package voronoi.tests;
 
 
-import java.util.List;
+import java.util.Iterator;
 import voronoi.helpers.AnuncioHelper;
 import voronoi.mappingpojos.Anuncio;
+import voronoi.mappingpojos.Estados;
 
 /**
  *
@@ -19,10 +20,13 @@ import voronoi.mappingpojos.Anuncio;
 
 public class Pruebas {
     
-    public static void main(String args[]){
-        List<Anuncio> anuncio=new AnuncioHelper().getAnuncioByID(1);
-        
-    System.out.println(anuncio.get(anuncio.size()-1).getId());
+    public  static void main(String args[]){
+    Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByREGEX("Doctores").iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                       System.out.println("----->>>>        " + anuncio.getNombre());
+                      
+                }
     
     }
     
