@@ -22,7 +22,7 @@ public class AnuncioHelper {
         this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    public List getAnuncioByID(int id){
+    public List getAnuncioByID(String id){
     List<Anuncio> anuncios = null;
     try {
         org.hibernate.Transaction tx = session.beginTransaction();

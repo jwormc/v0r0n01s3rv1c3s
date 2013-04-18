@@ -50,6 +50,22 @@ public class GenereitorHTML {
                 
     return anuncios_lis;
     }
+       
+       
+     public String getAnuncioById(String id){
+        String anuncios_lis="";
+        Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        anuncios_lis+="<b>" +anuncio.getNombre()+  "</b>,<b>" +anuncio.getCalle()+  "</b>,<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=22.1514818,-100.9802254&zoom=17&size=500x500&markers=color:blue%7Clabel:S%7C22.1514818,-100.9802254&sensor=false\" width=\"288\" height=\"200\"/>";
+                        System.out.println("a devolver" + anuncios_lis);
+                }
+                
+                 System.out.println("Lista de Estados Li OK!");
+                
+                
+    return anuncios_lis;
+    }
     
     
 }

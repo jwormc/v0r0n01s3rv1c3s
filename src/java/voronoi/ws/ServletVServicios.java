@@ -43,7 +43,7 @@ public class ServletVServicios extends HttpServlet {
         if(tipoS.length() > 0)
         tipo=Integer.parseInt(request.getParameter("tipoServicio")); 
         
-        request.getParameter("param2");
+        String param2=request.getParameter("param2");  //  id normalmente
        
         try {
         
@@ -57,6 +57,11 @@ public class ServletVServicios extends HttpServlet {
               case 2:     
                   out.println(new GenereitorHTML().getAnunciosRegExLi());
                    System.out.println("peticion de servicio 2 lista de Anuncios REGEX OK!");
+                   break;
+                  
+             case 3:     
+                   out.println(new GenereitorHTML().getAnuncioById(param2));
+                   System.out.println("peticion de servicio 3 obten anuncio por ID!");
                    break;
              
               default:

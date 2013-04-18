@@ -24,7 +24,7 @@ public class Pruebas {
     Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByREGEX("Doctores").iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                       System.out.println("----->>>>        " + anuncio.getNombre());
+                       System.out.println("----->>>>        " + anuncio.getNombre() + "     "   + anuncio.getId());
                       
                 }
     
