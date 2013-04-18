@@ -21,12 +21,11 @@ import voronoi.mappingpojos.Estados;
 public class Pruebas {
     
     public  static void main(String args[]){
-    Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByREGEX("Doctores").iterator();
-                while (iterator.hasNext()) {
-                        Anuncio anuncio=iterator.next();
-                       System.out.println("----->>>>        " + anuncio.getNombre() + "     "   + anuncio.getId());
-                      
-                }
+        
+  String s="(1,2)";
+  
+  
+  System.out.println("---"+s.substring(1,s.length()-1)+"---");
     
     }
     
