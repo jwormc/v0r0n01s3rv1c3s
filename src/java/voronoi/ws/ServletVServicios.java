@@ -50,18 +50,21 @@ public class ServletVServicios extends HttpServlet {
             
            switch(tipo){
                case 1:     
+                   System.out.println("atendiendo peticion Servicio 1...");
                    out.println(new GenereitorHTML().getEstadosListLi());
                    System.out.println("peticion de servicio 1 lista de estados OK!");
                    break;
               
               case 2:     
-                  out.println(new GenereitorHTML().getAnunciosRegExLi());
+                  System.out.println("atendiendo peticion Servicio 2...   regex=-->" + param2);
+                  out.println(new GenereitorHTML().getAnunciosRegExLi(param2));
                    System.out.println("peticion de servicio 2 lista de Anuncios REGEX OK!");
                    break;
                   
              case 3:     
+                   System.out.println("atendiendo peticion Servicio 3...  param2=-->" + param2);
                    out.println(new GenereitorHTML().getAnuncioById(param2));
-                   System.out.println("peticion de servicio 3 obten anuncio por ID!");
+                   System.out.println("peticion de servicio 3 obten anuncio por ID ok!");
                    break;
              
               default:

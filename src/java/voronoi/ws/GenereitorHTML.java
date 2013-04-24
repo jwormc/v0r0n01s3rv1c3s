@@ -37,16 +37,18 @@ public class GenereitorHTML {
     return estados_lis;
     }
     
-       public String getAnunciosRegExLi(){ 
+       public String getAnunciosRegExLi(String s){ 
     
-        String anuncios_lis="";
-        Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByREGEX("Doctores").iterator();
+        String anuncios_lis="";                                         
+        Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByREGEX(s).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\">"+ anuncio.getNombre() +"</a></li>";
+                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
+                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
                 }
                 
-                 System.out.println("Lista de Estados Li OK!");
+                 System.out.println("Lista de Anuncios Li OK!");
                 
                 
     return anuncios_lis;
@@ -58,16 +60,33 @@ public class GenereitorHTML {
         Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
+                        String urlCroquis;
                         String s=anuncio.getCoordenadas(); 
+                        
+                        
+                           if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
+                                 urlCroquis="<img id=\"img_pos\"  src=\"img/notfound.jpg\" width=\"500\" height=\"500\"/>*";
+                           else
+                             urlCroquis="<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size=500x500&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\"500\" height=\"500\"/>*";
+                      
+                        
+                        
+                        
                         anuncios_lis+="<b>"+anuncio.getNombre()+"</b>*"
                                      +"<h5>" +anuncio.getCalle()+" No"+anuncio.getNumero()+"<br>"+anuncio.getColonia()+", C.P. "+anuncio.getCp()+"</h5>*"
-                                     +"<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size=500x500&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\"500\" height=\"500\"/>*"
-                                     +"<img src=\"http://directel.mx/content/img/logos/"+anuncio.getLogo()+"\" alt=\"image\" style=\"position: absolute; top: 0%; left: 0%; margin-left: -16px; margin-top: -18px\">*"
-                                     +"<h5>"+anuncio.getTelefono()+"</h5>";
-                        System.out.println("a devolver" + anuncios_lis);
+                                     +urlCroquis
+                                     +"<img src=\"http://directel.mx/content/img/logos/"+anuncio.getLogo()+"\"    width=\"400\" height=\"200\"   \">*"
+                                     +""+listaTels(anuncio.getTelefono())+"*"
+                                     +"<li>"+anuncio.getHorario()+"</li>*"
+                                     +"<div><p>"+anuncio.getNombre()+"</p>"
+                                     +"<p>"+anuncio.getDescripcion()+"</p>" 
+                                     +"<p  class=\"ui-li-aside\">"+anuncio.getEmail()+"</p></div>*"
+                                     + getWebYSociales(anuncio.getWww() + "");
+                             
+   
+                        System.out.println("html generado -->  " + anuncios_lis);
                 }
-                
-                 System.out.println("Lista de Estados Li OK!");
+                 System.out.println("Lista de Anuncio Data Li OK!");
                 
                 
     return anuncios_lis;
@@ -75,12 +94,11 @@ public class GenereitorHTML {
      
      
      private String listaTels(String tel){
-     
-         
-           String[] ss=tel.split(" ");
-           String   sinS="";
-           for(int i=0;i<ss.length;i++){
-           sinS=sinS.concat(ss[i]);
+       
+  String[] ss=tel.split(" ");
+  String   sinS="";
+  for(int i=0;i<ss.length;i++){
+      sinS=sinS.concat(ss[i]);
   }
   
   
@@ -91,7 +109,7 @@ public class GenereitorHTML {
         for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 5).equals("Local")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[2]);
+            tels.add("Local:tel:"+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsLocal.. no problem :)");
             }
@@ -103,7 +121,7 @@ public class GenereitorHTML {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 7).equals("Celular")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("Cel:tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -117,7 +135,7 @@ public class GenereitorHTML {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 8).equals("NextelID")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[2]);
+            tels.add("Next. Id:tel:"+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -128,7 +146,7 @@ public class GenereitorHTML {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 6).equals("Nextel") && !ssC[i].substring(0, 8).equals("NextelID")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("NexTel:tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -140,7 +158,7 @@ public class GenereitorHTML {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 3).equals("FAX")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("FAX:tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -151,19 +169,47 @@ public class GenereitorHTML {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0,5).equals("01800")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("Tel (01-800):tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
         } 
         }
   
-
+        String finalString="";
          
-        // for(int ii=0;ii<tels.size();ii++)
-          //   System.out.println(tels.get(ii));
-         
-         return "tmp";
+        for(int ii=0;ii<tels.size();ii++){
+        finalString+="<li><a href=\""+tels.get(ii).split(":")[1]+":"+tels.get(ii).split(":")[2]+"\">"+tels.get(ii).split(":")[0]+":"+tels.get(ii).split(":")[2]+"</a></li>";
+        }
+        
+       
+        System.out.println(finalString);
+        
+        return   finalString;
+     }
+     
+     
+     public String getWebYSociales(String s){
+     
+      String[] ss=s.split(";");
+      List<String> sociales=new ArrayList<String>();
+      
+        for(int i=0;i<s.split(";").length;i++){
+            try{
+           sociales.add((s.split(";")[i]).split(",")[1]);
+            }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("nodata.. no added to Sociales array splitting.. no problem :)");
+            }
+        
+        }
+        
+        String finalString="";
+        for(int i=0;i<sociales.size();i++){   
+        finalString+="<li class='linkses'><a href=\" " + sociales.get(i) + "\"> <h2>"+sociales.get(i)+"</h2></a></li>";
+        }
+     
+        
+        return finalString;
      }
     
     

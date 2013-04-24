@@ -22,9 +22,32 @@ import voronoi.mappingpojos.Estados;
 public class Pruebas {
     
     public  static void main(String args[]){
+      String s="website,http://www.antenaradio.mx;facebook,http://www.facebook.com/antnaradio.mx;twitter,https://twitter.com/antenamx;google,";
+      String[] ss=s.split(";");
+      List<String> sociales=new ArrayList<String>();
+      
+        for(int i=0;i<s.split(";").length;i++){
+            try{
+           sociales.add((s.split(";")[i]).split(",")[1]);
+            }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("nodata.. no added to Sociales array splitting.. no problem :)");
+            }
         
-  String s="Local,444,842 66 85,;Celular,444,113 91 83,;Nextel,444,266 16 41,;Nextel ID,,92*11*31858,;01 800,01800,714 81 40,;FAX,444,822 30 26,";
+        }
+        
+        String finalString="";
+        for(int i=0;i<sociales.size();i++){
+            
+        finalString+="<li><a href=\" " + sociales.get(i) + "\"> <h2>el feis</h2></a></li>";
+           System.out.println(finalString); 
+        }
+        
   
+    }
+
+
+ public  String  getTels(String s){
+
   String[] ss=s.split(" ");
   String   sinS="";
   for(int i=0;i<ss.length;i++){
@@ -39,7 +62,7 @@ public class Pruebas {
         for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 5).equals("Local")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[2]);
+            tels.add("Local:tel:"+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsLocal.. no problem :)");
             }
@@ -51,7 +74,7 @@ public class Pruebas {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 7).equals("Celular")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("Cel:tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -65,7 +88,7 @@ public class Pruebas {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 8).equals("NextelID")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[2]);
+            tels.add("Next. Id:tel:"+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -76,7 +99,7 @@ public class Pruebas {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 6).equals("Nextel") && !ssC[i].substring(0, 8).equals("NextelID")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("NexTel:tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -88,7 +111,7 @@ public class Pruebas {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0, 3).equals("FAX")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("FAX:tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
@@ -99,18 +122,24 @@ public class Pruebas {
          for(int i=0;i<ssC.length;i++){
         if(ssC[i].substring(0,5).equals("01800")){
             try{
-            tels.add("tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            tels.add("Tel (01-800):tel:"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to telsCel.. no problem :)");
             }
         } 
         }
   
-
+        String finalString="";
          
-        // for(int ii=0;ii<tels.size();ii++)
-          //   System.out.println(tels.get(ii));
-         
-  
+        for(int ii=0;ii<tels.size();ii++){
+        finalString+="<li><a href=\""+tels.get(ii).split(":")[1]+":"+tels.get(ii).split(":")[2]+"\">"+tels.get(ii).split(":")[0]+":"+tels.get(ii).split(":")[2]+"</a></li>";
+        }
+       
+       
+       
+        return finalString;
     }
+
+
+
 }
