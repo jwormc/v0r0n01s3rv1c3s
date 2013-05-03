@@ -43,8 +43,13 @@ public class ServletVServicios extends HttpServlet {
         if(tipoS.length() > 0)
         tipo=Integer.parseInt(request.getParameter("tipoServicio")); 
         
-        String param2=request.getParameter("param2");  //  id normalmente
+        String anyparam=request.getParameter("anyparam");  //  id normalmente
+        String displayString="";
+        
+        if(request.getParameter("displaysize").length() > 0)
+        displayString=request.getParameter("displaysize");
        
+        
         try {
         
             
@@ -56,14 +61,14 @@ public class ServletVServicios extends HttpServlet {
                    break;
               
               case 2:     
-                  System.out.println("atendiendo peticion Servicio 2...   regex=-->" + param2);
-                  out.println(new GenereitorHTML().getAnunciosRegExLi(param2));
+                  System.out.println("atendiendo peticion Servicio 2...   regex=-->" + anyparam);
+                  out.println(new GenereitorHTML().getAnunciosRegExLi(anyparam));
                    System.out.println("peticion de servicio 2 lista de Anuncios REGEX OK!");
                    break;
                   
              case 3:     
-                   System.out.println("atendiendo peticion Servicio 3...  param2=-->" + param2);
-                   out.println(new GenereitorHTML().getAnuncioById(param2));
+                   System.out.println("atendiendo peticion Servicio 3...  param2=-->" + anyparam);
+                   out.println(new GenereitorHTML().getAnuncioById(anyparam,displayString));
                    System.out.println("peticion de servicio 3 obten anuncio por ID ok!");
                    break;
              

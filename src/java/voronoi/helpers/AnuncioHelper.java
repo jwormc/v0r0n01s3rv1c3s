@@ -42,7 +42,7 @@ public class AnuncioHelper {
     try {
         org.hibernate.Transaction tx = session.beginTransaction();
         //antes  Query q = session.createQuery ("from Anuncio where id < 100 AND  etiquetas like '%"+cadena+"%'  ");
-        Query q = session.createQuery ("from Anuncio where  etiquetas like '%"+cadena+"%'  ");
+        Query q = session.createQuery ("from Anuncio where id<100 AND etiquetas like '%"+cadena+"%'");
         anuncios = (List<Anuncio>) q.list();
 
     } catch (Exception e) {

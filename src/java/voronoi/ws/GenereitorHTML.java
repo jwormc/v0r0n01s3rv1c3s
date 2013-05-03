@@ -55,7 +55,7 @@ public class GenereitorHTML {
     }
        
        
-     public String getAnuncioById(String id){
+     public String getAnuncioById(String id,String displayString){
         String anuncios_lis="";
         Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
                 while (iterator.hasNext()) {
@@ -63,24 +63,27 @@ public class GenereitorHTML {
                         String urlCroquis;
                         String s=anuncio.getCoordenadas(); 
                         
+                        int xsize=Integer.parseInt(displayString.split("x")[0]);
+                        int ysize=Integer.parseInt(displayString.split("x")[1]);
+                        xsize=(xsize-(xsize/6)); //lo ancho si le tienes que reducir algo
+                        
                         
                            if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
-                                 urlCroquis="<img id=\"img_pos\"  src=\"img/notfound.jpg\" width=\"500\" height=\"500\"/>*";
+                                 urlCroquis="<img id=\"img_pos\"  src=\"img/notfound.jpg\" width=\"500\" height=\"500\"/>|";
                            else
-                             urlCroquis="<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size=500x500&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\"500\" height=\"500\"/>*";
+                             urlCroquis="<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\""+ xsize +"\" height=\""+ ysize +"\"/>|";
                       
                         
                         
-                        
-                        anuncios_lis+="<b>"+anuncio.getNombre()+"</b>*"
-                                     +"<h5>" +anuncio.getCalle()+" No"+anuncio.getNumero()+"<br>"+anuncio.getColonia()+", C.P. "+anuncio.getCp()+"</h5>*"
+                        anuncios_lis+="<b>"+anuncio.getNombre()+"</b>|"
+                                     +"<h5>" +anuncio.getCalle()+" No"+anuncio.getNumero()+"<br>"+anuncio.getColonia()+", C.P. "+anuncio.getCp()+"</h5>|"
                                      +urlCroquis
-                                     +"<img src=\"http://directel.mx/content/img/logos/"+anuncio.getLogo()+"\"    width=\"400\" height=\"200\"   \">*"
-                                     +""+listaTels(anuncio.getTelefono())+"*"
-                                     +"<li>"+anuncio.getHorario()+"</li>*"
+                                     +"<img src=\"http://directel.mx/content/img/logos/"+anuncio.getLogo()+"\"    width=\"400\" height=\"200\"   \">|"
+                                     +""+listaTels(anuncio.getTelefono())+"|"
+                                     +"<li>"+anuncio.getHorario()+"</li>|"
                                      +"<div><p>"+anuncio.getNombre()+"</p>"
                                      +"<p>"+anuncio.getDescripcion()+"</p>" 
-                                     +"<p  class=\"ui-li-aside\">"+anuncio.getEmail()+"</p></div>*"
+                                     +"<p  class=\"ui-li-aside\">"+anuncio.getEmail()+"</p></div>|"
                                      + getWebYSociales(anuncio.getWww() + "");
                              
    
@@ -179,7 +182,7 @@ public class GenereitorHTML {
         String finalString="";
          
         for(int ii=0;ii<tels.size();ii++){
-        finalString+="<li><a href=\""+tels.get(ii).split(":")[1]+":"+tels.get(ii).split(":")[2]+"\">"+tels.get(ii).split(":")[0]+":"+tels.get(ii).split(":")[2]+"</a></li>";
+        finalString+="<li class=\"linkses\" ><a href=\""+tels.get(ii).split(":")[1]+":"+tels.get(ii).split(":")[2]+"\">"+tels.get(ii).split(":")[0]+":"+tels.get(ii).split(":")[2]+"</a></li>";
         }
         
        
