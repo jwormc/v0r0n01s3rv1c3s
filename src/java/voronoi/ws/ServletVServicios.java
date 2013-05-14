@@ -71,6 +71,11 @@ public class ServletVServicios extends HttpServlet {
                    out.println(new GenereitorHTML().getAnuncioById(anyparam,displayString));
                    System.out.println("peticion de servicio 3 obten anuncio por ID ok!");
                    break;
+            case 4:     
+                   System.out.println("atendiendo peticion Servicio 4...  param2=-->" + anyparam);
+                   out.println(new GenereitorHTML().getFavoritosByIds(anyparam));
+                   System.out.println("peticion de servicio 3 obten Favoritos por IDs ok!");
+                   break;
              
               default:
                   out.println("peticion de servicio desconosido.");
