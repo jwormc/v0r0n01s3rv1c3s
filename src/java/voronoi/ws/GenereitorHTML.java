@@ -234,5 +234,22 @@ public class GenereitorHTML {
     return anuncios_favors;
     }
 
+        
+               public String getAnunciosBuscar(String s){ 
+    
+        String anuncios_lis="";                                         
+        Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosBusqueda(s).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
+                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                }
+                
+                 System.out.println("Lista de Anuncios Li OK!");
+                
+                
+    return anuncios_lis;
+    }
 
 }

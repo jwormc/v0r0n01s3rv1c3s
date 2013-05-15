@@ -52,6 +52,22 @@ public class AnuncioHelper {
     return anuncios;
 }
         
+             public List getAnunciosBusqueda(String cadena){
+    List<Anuncio> anuncios = null;
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        //antes  Query q = session.createQuery ("from Anuncio where id < 100 AND  etiquetas like '%"+cadena+"%'  ");
+        Query q = session.createQuery ("from Anuncio where id<1000 AND nombre like '%"+cadena+"%'");
+        anuncios = (List<Anuncio>) q.list();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return anuncios;
+}
+      
+        
         
             
         public List getAnunciosFavoritos(String ids){
