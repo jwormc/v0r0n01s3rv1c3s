@@ -26,6 +26,7 @@ public class AnuncioHelper {
     List<Anuncio> anuncios = null;
     try {
         org.hibernate.Transaction tx = session.beginTransaction();
+        System.out.println("--->" + id);
         Query q = session.createQuery ("from Anuncio where id="+id);
         anuncios = (List<Anuncio>) q.list();
 

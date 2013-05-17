@@ -71,7 +71,7 @@ public class GenereitorHTML {
                            if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
                                  urlCroquis="<img id=\"img_pos\"  src=\"img/notfound.jpg\" width=\"500\" height=\"500\"/>|";
                            else
-                             urlCroquis="<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\""+ xsize +"\" height=\""+ ysize +"\"/>|";
+                             urlCroquis="<a href=\"#mapa\"><img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\""+ xsize +"\" height=\""+ ysize +"\"/></a>|";
                       
                         
                         
