@@ -74,7 +74,7 @@ public class GenereitorHTML {
                            if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
                                  urlCroquis="<img id=\"img_pos\"  src=\"img/notfound.jpg\" width=\"500\" height=\"500\"/>|";
                            else
-                             urlCroquis="<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\""+ xsize +"\" height=\""+ ysize +"\"/>|";
+                             urlCroquis="<a href=\"#mapa\"><img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\""+ xsize +"\" height=\""+ ysize +"\"/></a>|";
                       
                         
                         
@@ -449,9 +449,23 @@ public class GenereitorHTML {
                  System.out.println("ERROR : "+this.path+"getClient_name"+" (id="+id+")-> : "+ex);
             }
 
-            return res;
-            
-        }//method getClient_name
+        
+               public String getAnunciosBuscar(String s){ 
+    
+        String anuncios_lis="";                                         
+        Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosBusqueda(s).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
+                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                }
+                
+                 System.out.println("Lista de Anuncios Li OK!");
+                
+                
+    return anuncios_lis;
+    }
 
         
         /***********************************************************************
