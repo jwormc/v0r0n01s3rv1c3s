@@ -21,6 +21,9 @@ import voronoi.mappingpojos.Estados;
  */
 public class GenereitorHTML {
     
+    
+    //Atributos
+    private static String path = "ws.GenereitorHTML.";
  
     public String getEstadosListLi(){
     
@@ -192,6 +195,128 @@ public class GenereitorHTML {
      }
      
      
+     /***********************************************************************
+      * listaTels_icon : Lista de Telefonos preparada para le formato nuevo
+      *                  Basado en listaTels
+      * 
+      * @date    May 17th, 2013
+      * @author  Howser
+      * @param   tel Lista de Telefonos
+      * @return  Código HTML5 de la lista
+      **********************************************************************/
+     private String listaTels_icon(String tel){
+       
+        String[] ss=tel.split(" ");
+        String   sinS="";
+        for(int i=0;i<ss.length;i++){
+            sinS=sinS.concat(ss[i]);
+        }
+  
+  
+        String[] ssC=sinS.split(";");
+        List<String> tags=new ArrayList<String>(); //Tags (Local, Celular, etc
+        List<String> tels=new ArrayList<String>(); //Teléfonos
+        
+        
+        
+        for(int i=0;i<ssC.length;i++){
+        if(ssC[i].substring(0, 5).equals("Local")){
+            try{
+                tags.add("Local");
+                tels.add(""+ssC[i].split(",")[2]);
+            }catch(ArrayIndexOutOfBoundsException e){
+                System.out.println("nodata.. no added to telsLocal.. no problem :)");
+            }
+        } 
+        }
+        
+        
+        List<String> telsCel=new ArrayList<String>();
+        for(int i=0;i<ssC.length;i++){
+        if(ssC[i].substring(0, 7).equals("Celular")){
+            try{
+                tags.add("Celular");
+                tels.add(""+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("nodata.. no added to telsCel.. no problem :)");
+            }
+        } 
+        }
+         
+        List<String> telsNexID=new ArrayList<String>();
+        for(int i=0;i<ssC.length;i++){
+        if(ssC[i].substring(0, 8).equals("NextelID")){
+            try{
+                tags.add("NextlID");
+                tels.add(""+ssC[i].split(",")[2]);
+            }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("nodata.. no added to telsNextID.. no problem :)");
+            }
+        } 
+        }
+         
+        List<String> telsNex=new ArrayList<String>();
+        for(int i=0;i<ssC.length;i++){
+        if(ssC[i].substring(0, 6).equals("Nextel") && !ssC[i].substring(0, 8).equals("NextelID")){
+            try{
+                tags.add("Nextel");
+                tels.add(""+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("nodata.. no added to Nextel.. no problem :)");
+            }
+        } 
+        }
+        
+  
+        List<String> telsFAX=new ArrayList<String>();
+        for(int i=0;i<ssC.length;i++){
+        if(ssC[i].substring(0, 3).equals("FAX")){
+            try{
+                tags.add("FAX");
+                tels.add(""+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("nodata.. no added to FAX.. no problem :)");
+            }
+        } 
+        }
+         
+        List<String> telsCeroUno=new ArrayList<String>();
+        for(int i=0;i<ssC.length;i++){
+        if(ssC[i].substring(0,5).equals("01800")){
+            try{
+                tags.add("01-800");
+                tels.add(":"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+            }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("nodata.. no added to 01-800.. no problem :)");
+            }
+        } 
+        }
+  
+        String finalString="";
+         
+        for(int ii=0;ii<tels.size();ii++){
+            finalString+="<div class='telefonos_'>";
+            finalString+="    <img src='img/phone.png'>";
+            finalString+="    <h3 class='contact_tag'>"+ tags.get(ii) +"</h3>";
+            finalString+="    <div class='telefonos_list'><a href='tel:"+tels.get(ii)+"'>"+ tels.get(ii) +"</a></div>";
+            finalString+="</div>";
+            
+        }//for
+        
+        /* Asi debe quedar
+         * <div class='telefonos_'>
+            <img src='img/phone.png'>
+            <h3 class='contact_tag'>Tels</h3>
+            <div class='telefonos_list'><a href=''></a></div>
+           </div>
+         */
+       
+        System.out.println(finalString);
+        
+        return   finalString;
+     }//lista_Tels_icon
+     
+     
      public String getWebYSociales(String s){
      
       String[] ss=s.split(";");
@@ -214,6 +339,72 @@ public class GenereitorHTML {
         
         return finalString;
      }
+     
+     /***********************************************************************
+      * listaWebs_icon : Lista de Webs preparada para le formato nuevo
+      * 
+      * 
+      * @date    May 17th, 2013
+      * @author  Howser
+      * @param   s Lista de Webs
+      * @return  Código HTML5 de la lista
+      **********************************************************************/
+     public String listaWebs_icon(String s){
+     
+      String[] ss=s.split(";");
+      List<String> tags  =new ArrayList<String>(); //website, facebook, twitter
+      List<String> links =new ArrayList<String>();
+      
+      
+        for(int i=0;i<s.split(";").length;i++){
+            try{
+                tags.add((s.split(";")[i]).split(",")[0]);
+                links.add((s.split(";")[i]).split(",")[1]);
+            }catch(ArrayIndexOutOfBoundsException e){
+                System.out.println("nodata.. no added to Sociales array splitting.. no problem :)");
+            }
+        
+        }
+        
+        String finalString="";
+        /* FORMATO A
+         <div class='web_a'>
+            <img src='img/website.png'>
+            <a class='link'>www.web.com</a>
+	 </div>
+         */
+        /*
+        for(int i=0;i<links.size();i++){   
+            finalString+="<div class='web_a'>";
+            finalString+="   <a href='"+links.get(i)+"'><img src='img/"+tags.get(i)+".png'></a>";
+            finalString+="   <a href='"+links.get(i)+"'  class='link'>"+links.get(i)+"</a>";
+            finalString+="</div>";
+                    
+        }//for
+        */
+        
+        
+        /* FORMATO B
+         <div class="web_b">
+            <img src='img/website.png'>
+            <h3 class='contact_tag'>Web</h3>
+            <div class='web_list_b'><a>www.web.com</a></div>
+	 </div>
+         */
+        for(int i=0;i<links.size();i++){   
+            finalString+="<div class='web_b'>";
+            finalString+="   <a href='"+links.get(i)+"'><img src='img/"+tags.get(i)+".png'></a>";
+            finalString+="   <h3 class='contact_tag'>"+tags.get(i)+"</h3>";
+            finalString+="   <div class='web_list_b'><a href='"+links.get(i)+"'>"+links.get(i)+"</a></div>";
+            finalString+="</div>";
+                    
+        }//for
+     
+        
+        
+        
+        return finalString;
+     }//listaWebs_icon
     
 
      
@@ -233,6 +424,296 @@ public class GenereitorHTML {
                 
     return anuncios_favors;
     }
+        
+        
+        /***********************************************************************
+         * getClient_name : Obtiene el nombre del cliente (negocio) por id
+         * 
+         * @date    May 15th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con el nombre
+         **********************************************************************/
+        public String getClient_name(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        res = anuncio.getNombre();
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_name"+" (id="+id+")-> : "+ex);
+            }
 
+            return res;
+            
+        }//method getClient_name
 
-}
+        
+        /***********************************************************************
+         * getClient_address : Obtiene la dirección del cliente (negocio) por id
+         * 
+         * @date    May 15th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con la dirección
+         **********************************************************************/
+        public String getClient_address(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        res = anuncio.getCalle()+" No."+anuncio.getNumero()+"<br>"+anuncio.getColonia()+", C.P. "+anuncio.getCp();
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_address"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_address
+        
+        
+        /***********************************************************************
+         * getClient_hours : Obtiene el horario del cliente (negocio) por id
+         * 
+         * @date    May 15th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con el horario
+         **********************************************************************/
+        public String getClient_hours(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        res = anuncio.getHorario();
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_hours"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_hours
+        
+        
+        /***********************************************************************
+         * getClient_tels : Obtiene los teléfonos del cliente (negocio) por id
+         * 
+         * @date    May 16th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con los teléfonos
+         **********************************************************************/
+        public String getClient_tels(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        res = listaTels_icon(anuncio.getTelefono());
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_tels"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_tels
+        
+        
+        /***********************************************************************
+         * getClient_email : Obtiene el email del cliente (negocio) por id
+         * 
+         * @date    May 15th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con el email
+         **********************************************************************/
+        public String getClient_email(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        res =anuncio.getEmail();
+                             
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_email"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_email
+        
+        /***********************************************************************
+         * getClient_web : Obtiene los enlances del cliente (negocio) por id
+         * 
+         * @date    May 15th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con los enlaces
+         **********************************************************************/
+        public String getClient_web(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        res = listaWebs_icon(anuncio.getWww() + "");
+                             
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_web"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_web
+        
+        /***********************************************************************
+         * getClient_logo : Obtiene el logo del cliente (negocio) por id
+         * 
+         * @date    May 16th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con el logo
+         **********************************************************************/
+        public String getClient_logo(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        String imgPath = "http://directel.mx/content/img/logos/";
+                        res = imgPath + anuncio.getLogo();
+                             
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_logo"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_logo
+        
+        
+        /***********************************************************************
+         * getClient_map : Obtiene el mapa del cliente (negocio) por id
+         * 
+         * @date    May 16th, 2013
+         * @author  Howser
+         * @param   id             Id del cliente
+         * @param   displayString  Area disponible para desplegar
+         * @return  Cadena con el mapa
+         **********************************************************************/
+        public String getClient_map(String id,String displayString){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        
+                        //System.out.println("................." + displayString);
+                        String urlCroquis ="";
+                        String s=anuncio.getCoordenadas(); 
+                        
+                        double xsize_d = Double.parseDouble(displayString.split("x")[0]);
+                        double ysize_d = Double.parseDouble(displayString.split("x")[1]);
+                        
+                        xsize_d=(xsize_d)*1.00; //cambia el ancho
+                        
+                        int xsize = (int)xsize_d;
+                        int ysize = (int)ysize_d;
+                        
+                           if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
+                                 urlCroquis="<img id=\"img_pos\"  src=\"img/notfound.jpg\" width=\"500\" height=\"500\"/>|";
+                           else
+                                  urlCroquis="<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\""+ xsize +"\" height=\""+ ysize +"\"/>|";
+                      
+                             
+                           res = urlCroquis;
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_map"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_map
+        
+        
+        /***********************************************************************
+         * getClient_info : Obtiene toda la informacion del cliente (negocio) por id
+         * 
+         * @date    May 17th, 2013
+         * @author  Howser
+         * @param   id             Id del cliente
+         * @param   displayString  Area disponible para desplegar
+         * @return  Cadena con la informacion
+         **********************************************************************/
+        public String getClient_info(String id,String displayString){
+        
+            String res   = "";             //Resultados
+            String client_logo = "";       //Logotipo del cliente
+            String client_name = "";       //Nombre del cliente
+            String client_addr = "";       //Direccion del cliente
+            String client_tels = "";       //Telefonos del cliente
+            String client_hours= "";       //Horario del cliente
+            String client_email= "";       //Email del cliente
+            String client_web  = "";       //Webs del cliente
+            String client_map  = "";       //Mapa del cliente
+            
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        client_logo = getClient_logo(id);    res+= client_logo  + "|";
+                        client_name = getClient_name(id);    res+= client_name  + "|";
+                        client_addr = getClient_address(id); res+= client_addr  + "|";
+                        client_tels = getClient_tels(id);    res+= client_tels  + "|";
+                        client_hours= getClient_hours(id);   res+= client_hours + "|";
+                        client_email= getClient_email(id);   res+= client_email + "|";
+                        client_web  = getClient_web(id);     res+= client_web   + "|";
+                        
+                        client_map  = getClient_map(id, displayString); res+= client_map + "";
+                             
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_info"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_info
+}//class
