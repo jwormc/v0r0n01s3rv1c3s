@@ -20,7 +20,7 @@ import voronoi.mappingpojos.Estados;
  * @author julio
  */
 public class GenereitorHTML {
-    
+    //testing git
     
     //Atributos
     private static String path = "ws.GenereitorHTML.";
@@ -448,6 +448,8 @@ public class GenereitorHTML {
             }catch(Exception ex){
                  System.out.println("ERROR : "+this.path+"getClient_name"+" (id="+id+")-> : "+ex);
             }
+            return res;
+        }//te
 
         
                public String getAnunciosBuscar(String s){ 
