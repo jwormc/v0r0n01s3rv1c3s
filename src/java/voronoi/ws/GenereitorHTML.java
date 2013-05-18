@@ -448,7 +448,8 @@ public class GenereitorHTML {
             }catch(Exception ex){
                  System.out.println("ERROR : "+this.path+"getClient_name"+" (id="+id+")-> : "+ex);
             }
-
+return res;
+        }
         
                public String getAnunciosBuscar(String s){ 
     
