@@ -138,7 +138,7 @@ public class ServletVServicios extends HttpServlet {
             case 5:     
                    System.out.println("atendiendo peticion Servicio 5...  param2=-->" + anyparam);
                    out.println(new GenereitorHTML().getAnunciosBuscar(anyparam));
-                   System.out.println("peticion de servicio 3 obten Favoritos por IDs ok!");
+                   System.out.println("peticion de servicio 5 Busqueda ok!");
                    break;
                 
                 
