@@ -78,6 +78,12 @@ public class ServletVServicios extends HttpServlet {
                    System.out.println("peticion de servicio 3 obten Favoritos por IDs ok!");
                    break;
                  
+             case 5:     
+                   System.out.println("atendiendo peticion Servicio 5...  param2=-->" + anyparam);
+                   out.println(new GenereitorHTML().getAnunciosBuscar(anyparam));
+                   System.out.println("peticion de servicio 5 Busqueda ok!");
+                   break;
+                 
              case 10:
                    System.out.println("atendiendo peticion Servicio 10...  Info_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_info(anyparam,displayString));
@@ -135,12 +141,12 @@ public class ServletVServicios extends HttpServlet {
                    System.out.println("peticion de servicio 18 ok!");
                    break;
              
-            case 5:     
-                   System.out.println("atendiendo peticion Servicio 5...  param2=-->" + anyparam);
-                   out.println(new GenereitorHTML().getAnunciosBuscar(anyparam));
-                   System.out.println("peticion de servicio 5 Busqueda ok!");
-                   break;
-                
+           
+             case 20:
+                  System.out.println("atendiendo peticion Servicio 20...  Version_app=-->" + anyparam);
+                  out.println(new GenereitorHTML().getVersion());
+                  System.out.println("peticion de servicio 20 ok!");
+                  break;
                 
               default:
                   out.println("peticion de servicio desconosido.");

@@ -23,7 +23,8 @@ public class GenereitorHTML {
     //testing git
     
     //Atributos
-    private static String path = "ws.GenereitorHTML.";
+    private static String path    = "ws.GenereitorHTML.";
+    private static String version = "0.8";
  
     public String getEstadosListLi(){
     
@@ -499,6 +500,34 @@ public class GenereitorHTML {
         
         
         /***********************************************************************
+         * getClient_address_map : Obtiene la dirección del cliente (negocio) por id para el mapa
+         * 
+         * @date    May 15th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con la dirección
+         **********************************************************************/
+        public String getClient_address_map(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+  
+                        res = anuncio.getCalle()+" No."+anuncio.getNumero()+" "+anuncio.getColonia();
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_address_map"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_address_map
+        
+        
+        /***********************************************************************
          * getClient_hours : Obtiene el horario del cliente (negocio) por id
          * 
          * @date    May 15th, 2013
@@ -565,12 +594,23 @@ public class GenereitorHTML {
         public String getClient_email(String id){
         
             String res = "";
+            String mail= "";
             try{
                 Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
   
-                        res =anuncio.getEmail();
+                        mail = anuncio.getEmail();
+                        res+= "<a href='mailto:"+mail+"'>";
+                        res+= mail;
+                        res+= "</a>";
+                        
+                        /*Debe quedar así*
+                         <a href='mailto:myemail@aol.com'>
+                           myemail@aol.com
+                         </a>
+                         */
+              
                              
                 }
                 
@@ -665,15 +705,17 @@ public class GenereitorHTML {
                         double ysize_d = Double.parseDouble(displayString.split("x")[1]);
                         
                         xsize_d=(xsize_d)*1.00; //cambia el ancho
+                        ysize_d=(ysize_d)*0.30; //cambia el alto
                         
                         int xsize = (int)xsize_d;
                         int ysize = (int)ysize_d;
                         
                            if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
-                                 urlCroquis="<img id=\"img_pos\"  src=\"img/notfound.jpg\" width=\"500\" height=\"500\"/>|";
+                                 urlCroquis="<img id='img_pos'  src='img/notfound.jpg' width='500' height='500'/>";
                            else
-                                  urlCroquis="<img id=\"img_pos\"  src=\"http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=18&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false\" width=\""+ xsize +"\" height=\""+ ysize +"\"/>|";
-                      
+                                 urlCroquis+="<a href='index.html#map_ext'>";
+                                 urlCroquis+="<img id='img_pos'  src='http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=17&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false' width='"+ xsize +"' height='"+ ysize +"'/>";
+                                 urlCroquis+="</a>";
                              
                            res = urlCroquis;
                 }
@@ -688,6 +730,54 @@ public class GenereitorHTML {
         
         
         /***********************************************************************
+         * getClient_mapExt : Obtiene el mapa grande del cliente (negocio) por id
+         * 
+         * @date    May 16th, 2013
+         * @author  Howser
+         * @param   id             Id del cliente
+         * @param   displayString  Area disponible para desplegar
+         * @return  Cadena con el mapa
+         **********************************************************************/
+        public String getClient_mapExt(String id,String displayString){
+        
+            String res = ""; 
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        
+                        //System.out.println("................." + displayString);
+                        String urlCroquis ="";
+                        String s=anuncio.getCoordenadas(); 
+                        
+                        double xsize_d = Double.parseDouble(displayString.split("x")[0]);
+                        double ysize_d = Double.parseDouble(displayString.split("x")[1]);
+                        
+                        xsize_d=(xsize_d)*1.00; //cambia el ancho
+                        ysize_d=(ysize_d)*1.00; //cambia el alto
+                        
+                        int xsize = (int)xsize_d;
+                        int ysize = (int)ysize_d;
+                        
+                        
+                           if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
+                                 urlCroquis="<img id='img_pos'  src='img/notfound.jpg' width='500' height='500'/>";
+                           else
+                                 urlCroquis+="<img id='img_pos'  src='http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=17&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:"+"S"+"%7C"+s.substring(1,s.length()-1)+"&sensor=false' width='"+ xsize +"' height='"+ ysize +"'/>";
+                                 
+                           res = urlCroquis;
+                }
+                
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_mapExt"+" (id="+id+")-> : "+ex);
+            }
+
+            return res;
+            
+        }//method getClient_mapExt
+        
+        
+        /***********************************************************************
          * getClient_info : Obtiene toda la informacion del cliente (negocio) por id
          * 
          * @date    May 17th, 2013
@@ -699,14 +789,15 @@ public class GenereitorHTML {
         public String getClient_info(String id,String displayString){
         
             String res   = "";             //Resultados
-            String client_logo = "";       //Logotipo del cliente
-            String client_name = "";       //Nombre del cliente
-            String client_addr = "";       //Direccion del cliente
-            String client_tels = "";       //Telefonos del cliente
-            String client_hours= "";       //Horario del cliente
-            String client_email= "";       //Email del cliente
-            String client_web  = "";       //Webs del cliente
-            String client_map  = "";       //Mapa del cliente
+            String client_logo    = "";       //Logotipo del cliente
+            String client_name    = "";       //Nombre del cliente
+            String client_addr    = "";       //Direccion del cliente
+            String client_tels    = "";       //Telefonos del cliente
+            String client_hours   = "";       //Horario del cliente
+            String client_email   = "";       //Email del cliente
+            String client_web     = "";       //Webs del cliente
+            String client_map     = "";       //Mapa del cliente
+            String client_map_ext = "";    //Mapa del cliente grande
             
             try{
                 Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
@@ -721,7 +812,8 @@ public class GenereitorHTML {
                         client_email= getClient_email(id);   res+= client_email + "|";
                         client_web  = getClient_web(id);     res+= client_web   + "|";
                         
-                        client_map  = getClient_map(id, displayString); res+= client_map + "";
+                        client_map      = getClient_map(id, displayString);    res+= client_map     + "|";
+                        client_map_ext  = getClient_mapExt(id, displayString); res+= client_map_ext + "";
                              
                 }
                 
@@ -732,4 +824,17 @@ public class GenereitorHTML {
             return res;
             
         }//method getClient_info
+        
+        
+        /***********************************************************************
+         * getVersion : Obtiene la version de la app
+         * 
+         * @date    May 21th, 2013
+         * @author  Howser
+         * @return  Cadena con la version
+         **********************************************************************/
+        public String getVersion(){
+        
+            return version + "|" + "2013";     
+        }//method getVersion
 }//class
