@@ -12,8 +12,12 @@ import java.util.Iterator;
 import java.util.List;
 import voronoi.helpers.AnuncioHelper;
 import voronoi.helpers.EstadosHelpers;
+import voronoi.helpers.CiudadHelper;
+import voronoi.helpers.CategoriaHelper;
 import voronoi.mappingpojos.Anuncio;
 import voronoi.mappingpojos.Estados;
+import voronoi.mappingpojos.Ciudad;
+import voronoi.mappingpojos.Categoria;
 
 /**
  *
@@ -41,15 +45,147 @@ public class GenereitorHTML {
     return estados_lis;
     }
     
+    /***********************************************************************
+      * getCiudadesListLi : Regresa la Lista de ciudades disponibles
+      * 
+      * @date    May 28th, 2013
+      * @author  Howser
+      * @return  String con las ciudades
+      **********************************************************************/
+    public String getCiudadesListLi(){
+    
+        String ciudades_lis="";
+        try{
+            Iterator<Ciudad> iterator = new CiudadHelper().getCiudades().iterator();
+            while (iterator.hasNext()) {
+                    Ciudad city=iterator.next();
+                    ciudades_lis+="<li id='"+city.getId() +"' title='"+ city.getNombre()+"' class='ciudad' ><a href='#lista_categorias' >"+ city.getNombre()+"</a></li>";
+            }//while
+
+             //System.out.println("Lista de Ciudades cargada...!!");
+            
+            //La class='ciudad' es necesaria para que .ajax la ubique
+             
+        }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getCiudadesListLi"+" : "+ex);
+        }
+                
+        return ciudades_lis;
+    }//method getCiudadesListLi
+    
+    
+    /***********************************************************************
+      * getCategoriasListLi : Regresa la Lista de categorias
+      * 
+      * @date    May 31th, 2013
+      * @author  Howser
+      * @return  String con las categorias
+      **********************************************************************/
+    public String getCategoriasListLi(){
+    
+        String res="";
+        String id    ="";
+        String title = "";
+        String text_ = "";   //Indicio que se ve en dispositivo móvil
+        try{
+            Iterator<Categoria> iterator = new CategoriaHelper().getCategorias().iterator();
+            while (iterator.hasNext()) {
+                try{
+                    Categoria cat=iterator.next();
+                    id = ""; title = ""; text_ = "";
+                    
+                    //minusculas, espacios intermedios con _, sin acentos
+                    id = cat.getUrl().trim().toLowerCase(); //salud-y-belleza
+                    id = id.replaceAll(" ", "_");
+                    id = id.replaceAll("-", "_");
+                    id = id.replaceAll("á","a");
+                    id = id.replaceAll("é","e");
+                    id = id.replaceAll("í","i");
+                    id = id.replaceAll("ó","o");
+                    id = id.replaceAll("ú","u");
+                    
+                    //mayusculas, sin acentos
+                    title = cat.getSecciones().trim().toUpperCase();  //Academias,Ambulancias,Clínicas y Hospitales,Enfermeras,Farmacias y Droguerías,.....
+                    title = title.replaceAll("Á","A");
+                    title = title.replaceAll("É","E");
+                    title = title.replaceAll("Í","I");
+                    title = title.replaceAll("Ó","O");
+                    title = title.replaceAll("Ú","U");
+                    
+                    //
+                    text_ = cat.getSecciones();
+                    text_ = text_.replace('|', ',');
+                    if(text_.length()>20)
+                        text_ = text_.substring(0,19);
+                    text_+="....";
+                    
+                    res+= "<li id='li_"+id+"'><a href='#categoria' id='"+id+"' title='"+title+"' class='categoria'>";
+                    res+= "     <img src='img/cat/logo_"+id+".png'/>";
+                    res+= "     <h2>"+cat.getNombre().trim()+"</h2>";
+                    res+= "     <p>"+text_+"</p></a>";
+                    res+= "</li>";
+                    
+                }catch(Exception ex_1){
+                    System.out.println("ERROR : "+this.path+"getCategoriasListLi"+" : "+ex_1);
+                }
+                    
+            }//while
+
+             //System.out.println("Lista de Categorias cargada...!!");
+            
+            /*Así debe quedar
+             * id    -> Icono y Nombre de la categoría
+             * title -> Parámetros de búsqueda (minusculas, sin acentos, separados por |
+             * 
+             <li id='li_salud'><a href='#categoria' id='doctores' title='salud' class='categoria'>
+                <img src='img/cat/logo_salud.png'>
+                <h2>Salud y Belleza</h2>
+                <p>Farmacias, Médicos, Dentistas .....</p></a>
+             </li>
+             */
+             
+        }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getCategoriasListLi"+" : "+ex);
+        }
+                
+        return res;
+    }//method getCategoriasListLi
+    
+    
+   /***********************************************************************
+      * getAnuncios_KeyLi : Regresa la Lista de Anuncios que coincidan con alguna
+      *                     de las etiquetas de las secciones y que correspondan a la ciudad
+      * 
+      * @date    May 31th, 2013
+      * @author  Howser
+      * @param   keywords   Etiquetas
+      * @param   city       Id de la Ciudad
+      * @return  String con las categorias
+      **********************************************************************/
+    public String getAnuncios_KeyLi(String keywords,String city){ 
+    
+        String anuncios_lis="";                                         
+        Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByKeywords(keywords,city).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h2>"+ anuncio.getNombre() +"</h2>"
+                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class='ui-li-aside'><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                }
+                     
+    return anuncios_lis;
+    }//method getAnuncios_KeyLi
+    
+    
        public String getAnunciosRegExLi(String s){ 
     
         String anuncios_lis="";                                         
         Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByREGEX(s).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
+                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h2>"+ anuncio.getNombre() +"</h2>"
                                      + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
-                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                                     + "<p class='ui-li-aside'><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
                 }
                 
                  System.out.println("Lista de Anuncios Li OK!");
@@ -215,7 +351,7 @@ public class GenereitorHTML {
   
   
         String[] ssC=sinS.split(";");
-        List<String> tags=new ArrayList<String>(); //Tags (Local, Celular, etc
+        List<String> tags=new ArrayList<String>(); //Tags (Local, Celular, etc..)
         List<String> tels=new ArrayList<String>(); //Teléfonos
         
         
@@ -286,7 +422,7 @@ public class GenereitorHTML {
         if(ssC[i].substring(0,5).equals("01800")){
             try{
                 tags.add("01-800");
-                tels.add(":"+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
+                tels.add(""+ssC[i].split(",")[1]+ssC[i].split(",")[2]);
             }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("nodata.. no added to 01-800.. no problem :)");
             }
@@ -312,11 +448,109 @@ public class GenereitorHTML {
            </div>
          */
        
-        System.out.println(finalString);
+        //System.out.println(finalString);
         
         return   finalString;
      }//lista_Tels_icon
      
+     
+     /***********************************************************************
+      * listaTels_all : Lista de Telefonos preparada para le formato nuevo
+      *                 
+      * 
+      * @date    May 29th, 2013
+      * @author  Howser
+      * @param   tel Lista de Telefonos
+      * @return  Código HTML5 de la lista
+      **********************************************************************/
+     private String listaTels_all(String tel){
+       
+        String res = "";
+        try{
+        
+            //Separa las entradas de cada telefono
+            String[] list_ = tel.split(";");
+            String[] tel_component = null;
+
+            List<String> tags  = new ArrayList<String>(); //Tags (Local, Celular, etc..)
+            List<String> ladas = new ArrayList<String>(); //Ladas
+            List<String> tels  = new ArrayList<String>(); //Telefonos
+            List<String> desc  = new ArrayList<String>(); //Descripcion
+
+            
+            //Recorre cada entrada de telefono (TAG,LADA,TEL,DESC)
+            for(int i=0;i<list_.length;i++){
+                try{
+                    //Los componentes estan separados por comas (',')
+                    tel_component = list_[i].split(",");
+                    
+                    //Etiqueta o nombre del Telefono (Local, Celular, Nextel, etc....)
+                    if(tel_component.length>0)
+                        tags.add(tel_component[0]);
+                    else
+                        tags.add("");
+                    
+                    //Lada del telefono
+                    if(tel_component.length>1)
+                        ladas.add(tel_component[1]);
+                    else
+                        ladas.add("");
+                    
+                    //Telefono
+                    if(tel_component.length>2)
+                        tels.add(tel_component[2]);
+                    else
+                        tels.add("");
+                    
+                    //Descripcion si existe
+                    if(tel_component.length>3)
+                        desc.add(" ("+ tel_component[3]+")"); //Se le agrgan los parentesis aqui Local (Servicio 24hrs)
+                    else
+                        desc.add("");
+                        
+                    
+                }catch(Exception ex_t){
+                    System.out.println("ERROR : "+this.path+"listaTels_all"+" : "+ex_t);
+                }
+            }//for
+            
+            //Ahora se forma la cadena de salida
+            String finalString="";
+            String lada = "";
+            String tel_ = "";
+
+            for(int ii=0;ii<tels.size();ii++){
+                                
+                //La LADA visible en texto se pone entre () solo si existe
+                if(ladas.get(ii).length()>0)
+                    lada = "("+ ladas.get(ii)+")";
+                else
+                    lada = "";
+                
+                //El telefono del link tel: , no debe contener espacios
+                tel_ = tels.get(ii).replaceAll(" ", "");
+                
+                finalString+="<div class='telefonos_'>";
+                finalString+="    <img src='img/phone.png'>";
+                finalString+="    <h3 class='contact_tag'>"+ tags.get(ii) + desc.get(ii) + "</h3>";
+                finalString+="    <div class='telefonos_list'><a href='tel:"+ ladas.get(ii) + tel_+"'>"+ lada + tels.get(ii) +"</a></div>";
+                finalString+="</div>";
+
+            }//for
+
+            res = finalString;
+            /* Asi debe quedar
+             * <div class='telefonos_'>
+                <img src='img/phone.png'>
+                <h3 class='contact_tag'>Local (con 5 lineas)</h3>
+                <div class='telefonos_list'><a href='444123456'>(444)12 3456</a></div>
+               </div>
+             */
+        }catch(Exception ex){
+            System.out.println("ERROR : "+this.path+"listaTels_all"+" : "+ex);
+        }
+        return  res;
+     }//method listaTels_all
      
      public String getWebYSociales(String s){
      
@@ -405,7 +639,7 @@ public class GenereitorHTML {
         
         
         return finalString;
-     }//listaWebs_icon
+     }//method listaWebs_icon
     
 
      
@@ -427,6 +661,51 @@ public class GenereitorHTML {
     }
         
         
+        
+
+        
+               public String getAnunciosBuscar(String s){ 
+    
+        String anuncios_lis="";                                         
+        Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosBusqueda(s).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
+                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                }
+                
+                 System.out.println("Lista de Anuncios Li OK!");
+                
+                
+    return anuncios_lis;
+    }
+               
+        /***********************************************************************
+        * getAnunciosSearch : Regresa la Lista de Anuncios que coincidan con alguna
+        *                     una palabra clave de busqueda en el nombre
+        * 
+        * @date    May 31th, 2013
+        * @param   keyword   Palabra clave
+        * @param   city      Id de la Ciudad
+        * @author  Howser
+        * @return  Lista con los anuncios
+        **********************************************************************/
+        public String getAnunciosSearch(String keyword, String city){ 
+    
+            String anuncios_lis="";                                         
+            Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosSearch(keyword,city).iterator();
+                while (iterator.hasNext()) {
+                        Anuncio anuncio=iterator.next();
+                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h2>"+ anuncio.getNombre() +"</h2>"
+                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class='ui-li-aside'><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                }//while
+                
+
+            return anuncios_lis;
+        }//method getAnunciosSearch
+
         /***********************************************************************
          * getClient_name : Obtiene el nombre del cliente (negocio) por id
          * 
@@ -450,26 +729,33 @@ public class GenereitorHTML {
                  System.out.println("ERROR : "+this.path+"getClient_name"+" (id="+id+")-> : "+ex);
             }
             return res;
-        }//te
-
+        }//method getClient_name
         
-               public String getAnunciosBuscar(String s){ 
-    
-        String anuncios_lis="";                                         
-        Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosBusqueda(s).iterator();
+        
+        /***********************************************************************
+         * getClient_desc : Obtiene la descripcion corta del cliente (negocio) por id
+         * 
+         * @date    May 27th, 2013
+         * @author  Howser
+         * @param   id 
+         * @return  Cadena con el nombre
+         **********************************************************************/
+        public String getClient_desc(String id){
+        
+            String res = "";
+            try{
+                Iterator<Anuncio> iterator = new AnuncioHelper().getAnuncioByID(id).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
-                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
-                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+  
+                        res = anuncio.getShortD();
                 }
                 
-                 System.out.println("Lista de Anuncios Li OK!");
-                
-                
-    return anuncios_lis;
-    }
-
+            }catch(Exception ex){
+                 System.out.println("ERROR : "+this.path+"getClient_desc"+" (id="+id+")-> : "+ex);
+            }
+            return res;
+        }//method getClient_desc
         
         /***********************************************************************
          * getClient_address : Obtiene la dirección del cliente (negocio) por id
@@ -543,7 +829,27 @@ public class GenereitorHTML {
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
   
-                        res = anuncio.getHorario();
+                        String hr = anuncio.getHorario();
+                        
+                        //Solo si existe horario lo coloca
+                        if(hr!=null && hr.length()>0){
+                            res+="<div class='horario_'>";
+                            res+="  <img src='img/clock.png'/>";
+			    res+="  <h3 class='contact_tag'>Horario</h3>";
+			    res+="  <div class='horario_list'>";
+                            res+=       anuncio.getHorario();
+                            res+="  </div>";
+                            res+="</div>";
+                            
+                        }
+ 
+                         /*Debe quedar así*
+                            <div class='horario_'>
+                                <img src='img/clock.png'/>
+                                <h3 class='contact_tag'>Horario</h3>
+                                <div class='horario_list'></div>
+                            </div>
+                         */
                 }
                 
             }catch(Exception ex){
@@ -571,7 +877,7 @@ public class GenereitorHTML {
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
   
-                        res = listaTels_icon(anuncio.getTelefono());
+                        res = listaTels_all(anuncio.getTelefono());
                 }
                 
             }catch(Exception ex){
@@ -601,17 +907,30 @@ public class GenereitorHTML {
                         Anuncio anuncio=iterator.next();
   
                         mail = anuncio.getEmail();
-                        res+= "<a href='mailto:"+mail+"'>";
-                        res+= mail;
-                        res+= "</a>";
+                        
+                        //Solo si existe mail lo coloca
+                        if(mail!=null && mail.length()>0){
+                            res+= "<div class='email_'>";
+                            res+= "     <img src='img/email.png'/>";
+                            res+= "     <h3 class='contact_tag'>Email</h3>";
+                            res+= "     <div class='email_list'>";
+                            res+= "         <a href='mailto:"+mail+"'>";
+                            res+=            mail;
+                            res+= "         </a>";
+                            res+= "     </div>";
+                            res+= "</div>";
+                        }
                         
                         /*Debe quedar así*
-                         <a href='mailto:myemail@aol.com'>
-                           myemail@aol.com
-                         </a>
+                         <div class='email_'>
+                            <img src='img/email.png'/>
+                            <h3 class='contact_tag'>Email</h3>
+                            <div class='email_list'>
+                                <a href='mailto:a@a.com'>a@a.com</a>
+                            </div>
+                         </div>
                          */
-              
-                             
+           
                 }
                 
             }catch(Exception ex){
@@ -667,7 +986,14 @@ public class GenereitorHTML {
                         Anuncio anuncio=iterator.next();
   
                         String imgPath = "http://directel.mx/content/img/logos/";
-                        res = imgPath + anuncio.getLogo();
+                        String img = anuncio.getLogo();
+                        
+                        if(img!=null && img.length()>0)
+                            res = imgPath + anuncio.getLogo();
+                        
+                        //Si no existe imagen se pone el Logo de Directel
+                        else
+                            res = "css/images/logo_directel.png";
                              
                 }
                 
@@ -713,11 +1039,21 @@ public class GenereitorHTML {
                            if(anuncio.getCoordenadas().equals(null) || anuncio.getCoordenadas().length()==0)
                                  urlCroquis="<img id='img_pos'  src='img/notfound.jpg' width='500' height='500'/>";
                            else
-                                 urlCroquis+="<a href='index.html#map_ext'>";
-                                 urlCroquis+="<img id='img_pos'  src='http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=17&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false' width='"+ xsize +"' height='"+ ysize +"'/>";
-                                 urlCroquis+="</a>";
+                                 urlCroquis+="<div class='map_'>";
+                                 urlCroquis+="  <a href='index.html#map_ext'>";
+                                 urlCroquis+="      <img id='img_pos'  src='http://maps.googleapis.com/maps/api/staticmap?center="+s.substring(1,s.length()-1)+"&zoom=17&size="+   xsize+"x"+ysize   +"&markers=color:blue%7Clabel:S%7C"+s.substring(1,s.length()-1)+"&sensor=false' width='"+ xsize +"' height='"+ ysize +"'/>";
+                                 urlCroquis+="  </a>";
+                                 urlCroquis+="</div>";
                              
                            res = urlCroquis;
+                           
+                           /*Debe quedar así
+                            <div class='map_'>
+                               <a href='index.html#map_ext'>
+				<img src='img/mapota.png'/>
+                               </a>
+			    </div>
+                            */
                 }
                 
             }catch(Exception ex){
@@ -791,6 +1127,7 @@ public class GenereitorHTML {
             String res   = "";             //Resultados
             String client_logo    = "";       //Logotipo del cliente
             String client_name    = "";       //Nombre del cliente
+            String client_desc    = "";       //Descripcion corta del cliente
             String client_addr    = "";       //Direccion del cliente
             String client_tels    = "";       //Telefonos del cliente
             String client_hours   = "";       //Horario del cliente
@@ -806,6 +1143,7 @@ public class GenereitorHTML {
   
                         client_logo = getClient_logo(id);    res+= client_logo  + "|";
                         client_name = getClient_name(id);    res+= client_name  + "|";
+                        client_desc = getClient_desc(id);    res+= client_desc  + "|";
                         client_addr = getClient_address(id); res+= client_addr  + "|";
                         client_tels = getClient_tels(id);    res+= client_tels  + "|";
                         client_hours= getClient_hours(id);   res+= client_hours + "|";
