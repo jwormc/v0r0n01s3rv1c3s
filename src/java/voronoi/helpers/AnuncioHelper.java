@@ -38,7 +38,7 @@ public class AnuncioHelper {
 }
     
     
-        public List getAnunciosByREGEX(String cadena){
+public List getAnunciosByREGEX(String cadena){
     List<Anuncio> anuncios = null;
     try {
         org.hibernate.Transaction tx = session.beginTransaction();
@@ -53,7 +53,85 @@ public class AnuncioHelper {
     return anuncios;
 }
         
-             public List getAnunciosBusqueda(String cadena){
+    /***********************************************************************
+      * getAnunciosByKeywords : Regresa la Lista de Anuncios que coincidan con alguna
+      *                         de las etiquetas de las secciones y que correspondan a la ciudad
+      * 
+      * @date    May 31th, 2013
+      * @param   keywords   Etiquetas
+      * @param   city       Id de la Ciudad
+      * @author  Howser
+      * @return  Lista con los anuncios
+      **********************************************************************/
+public List getAnunciosByKeywords(String keywords, String city){
+    List<Anuncio> anuncios = null;
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        
+        /*
+         SELECT *
+         from anuncio
+         where REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER(etiquetas),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U') LIKE '%PÚBLICA%'
+         */
+        String[] tags = keywords.split("\\|");
+        
+        String q = "FROM Anuncio WHERE ciudad="+city+" AND (";
+        
+        //Se agrega cada eqtiqueta
+        for(int i=0;i<tags.length;i++){
+            q+=" REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER(etiquetas),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U') LIKE '%"+tags[i]+"%' OR";
+        }//for
+        
+        q = q.substring(0, q.length()-2); //Elimina ultimo OR
+        q+=")";                           //Cierra condicion AND
+        
+        
+        Query q_ = session.createQuery (q);
+        anuncios = (List<Anuncio>) q_.list();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    
+    return anuncios;
+}//method getAnunciosByKeywords
+
+
+    /***********************************************************************
+      * getAnunciosSearch : Regresa la Lista de Anuncios que coincidan con alguna
+      *                     una palabra clave de busqueda en el nombre
+      * 
+      * @date    May 31th, 2013
+      * @param   keyword   Palabra clave
+      * @param   city      Id de la Ciudad
+      * @author  Howser
+      * @return  Lista con los anuncios
+      **********************************************************************/
+
+public List getAnunciosSearch(String keyword, String city){
+    List<Anuncio> anuncios = null;
+    try {
+        org.hibernate.Transaction tx = session.beginTransaction();
+        /*
+         SELECT *
+         from anuncio
+         where ciudad=1 AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER(nombre),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U') LIKE '%periquin%'
+         */
+         
+         String q = "FROM Anuncio WHERE ciudad="+city+" AND ";
+         q+=" REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER(nombre),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U') LIKE '%"+keyword.toUpperCase()+"%'";
+         
+         Query q_ = session.createQuery (q);
+         anuncios = (List<Anuncio>) q_.list();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return anuncios;
+}//method getAnunciosSearch
+
+public List getAnunciosBusqueda(String cadena){
     List<Anuncio> anuncios = null;
     try {
         org.hibernate.Transaction tx = session.beginTransaction();
@@ -71,7 +149,7 @@ public class AnuncioHelper {
         
         
             
-        public List getAnunciosFavoritos(String ids){
+public List getAnunciosFavoritos(String ids){
     List<Anuncio> anuncios = null;
     try {
         org.hibernate.Transaction tx = session.beginTransaction();

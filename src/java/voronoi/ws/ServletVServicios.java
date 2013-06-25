@@ -48,103 +48,128 @@ public class ServletVServicios extends HttpServlet {
         
         if(request.getParameter("displaysize").length() > 0)
         displayString=request.getParameter("displaysize");
+        
+        String idCiudad="";
+        if(request.getParameter("idciudad")!=null)
+            idCiudad=request.getParameter("idciudad");
+        
        
         
         try {
         
             
            switch(tipo){
+             case 0: //Este es el que se tiene que usar para el Schema real de directel    
+                   System.out.println("atendiendo peticion Servicio 0...");
+                   out.println(new GenereitorHTML().getCiudadesListLi());
+                   System.out.println("peticion de servicio 1 lista de ciudades OK!");
+                   break;
+                   
              case 1:     
-                   System.out.println("atendiendo peticion Servicio 1...");
+                   //System.out.println("atendiendo peticion Servicio 1...");
                    out.println(new GenereitorHTML().getEstadosListLi());
-                   System.out.println("peticion de servicio 1 lista de estados OK!");
+                   //System.out.println("peticion de servicio 1 lista de estados OK!");
                    break;
               
              case 2:     
-                   System.out.println("atendiendo peticion Servicio 2...   regex=-->" + anyparam);
-                   out.println(new GenereitorHTML().getAnunciosRegExLi(anyparam));
-                   System.out.println("peticion de servicio 2 lista de Anuncios REGEX OK!");
+                   //System.out.println("atendiendo peticion Servicio 2...   regex=-->" + anyparam);
+                   //out.println(new GenereitorHTML().getAnunciosRegExLi(anyparam));
+                   out.println(new GenereitorHTML().getAnuncios_KeyLi(anyparam,idCiudad));
+                   //System.out.println("peticion de servicio 2 lista de Anuncios REGEX OK!");
                    break;
                   
              case 3:     
-                   System.out.println("atendiendo peticion Servicio 3...  param2=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 3...  param2=-->" + anyparam);
                    out.println(new GenereitorHTML().getAnuncioById(anyparam,displayString));
-                   System.out.println("peticion de servicio 3 obten anuncio por ID ok!");
+                   //System.out.println("peticion de servicio 3 obten anuncio por ID ok!");
                    break;
                  
              case 4:     
-                   System.out.println("atendiendo peticion Servicio 4...  param2=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 4...  param2=-->" + anyparam);
                    out.println(new GenereitorHTML().getFavoritosByIds(anyparam));
-                   System.out.println("peticion de servicio 3 obten Favoritos por IDs ok!");
+                   //System.out.println("peticion de servicio 3 obten Favoritos por IDs ok!");
                    break;
                  
+             case 5:     
+                   //System.out.println("atendiendo peticion Servicio 5...  param2=-->" + anyparam);
+                   //out.println(new GenereitorHTML().getAnunciosBuscar(anyparam));
+                   out.println(new GenereitorHTML().getAnunciosSearch(anyparam,idCiudad));
+                   //System.out.println("peticion de servicio 5 Busqueda ok!");
+                   break;
+                 
+             case 6:     
+                   //System.out.println("atendiendo peticion Servicio 6...  param2=-->" + anyparam);
+                   out.println(new GenereitorHTML().getCategoriasListLi());
+                   //System.out.println("peticion de servicio 6 Categorías ok!");
+                   break;   
+                 
              case 10:
-                   System.out.println("atendiendo peticion Servicio 10...  Info_Cliente=-->" + anyparam);
+                   ////System.out.println("atendiendo peticion Servicio 10...  Info_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_info(anyparam,displayString));
-                   System.out.println("peticion de servicio 10 ok!");
+                   //System.out.println("peticion de servicio 10 ok!");
                    break;
                  
              case 11:
-                   System.out.println("atendiendo peticion Servicio 11...  Nombre_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 11...  Nombre_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_name(anyparam));
-                   System.out.println("peticion de servicio 11 ok!");
+                   //System.out.println("peticion de servicio 11 ok!");
                    break;
                  
              case 12:
-                   System.out.println("atendiendo peticion Servicio 12...  Direccion_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 12...  Direccion_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_address(anyparam));
-                   System.out.println("peticion de servicio 12 ok!");
+                   //System.out.println("peticion de servicio 12 ok!");
                    break;
                  
              case 13:
-                   System.out.println("atendiendo peticion Servicio 13...  Telefonos_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 13...  Telefonos_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_tels(anyparam));
-                   System.out.println("peticion de servicio 13 ok!");
+                   //System.out.println("peticion de servicio 13 ok!");
                    break;
                  
              case 14:
-                   System.out.println("atendiendo peticion Servicio 14...  Horario_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 14...  Horario_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_hours(anyparam));
-                   System.out.println("peticion de servicio 14 ok!");
+                   //System.out.println("peticion de servicio 14 ok!");
                    break;
                  
                  
              case 15:
-                   System.out.println("atendiendo peticion Servicio 15...  Email_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 15...  Email_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_email(anyparam));
-                   System.out.println("peticion de servicio 15 ok!");
+                   //System.out.println("peticion de servicio 15 ok!");
                    break;
                  
                  
              case 16:
-                   System.out.println("atendiendo peticion Servicio 16...  Web_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 16...  Web_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_web(anyparam));
-                   System.out.println("peticion de servicio 16 ok!");
+                   //System.out.println("peticion de servicio 16 ok!");
                    break;
                  
                               
              case 17:
-                   System.out.println("atendiendo peticion Servicio 17...  Logo_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 17...  Logo_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_logo(anyparam));
-                   System.out.println("peticion de servicio 17 ok!");
+                   //System.out.println("peticion de servicio 17 ok!");
                    break;
                  
              case 18:
-                   System.out.println("atendiendo peticion Servicio 18...  Mapa_Cliente=-->" + anyparam);
+                   //System.out.println("atendiendo peticion Servicio 18...  Mapa_Cliente=-->" + anyparam);
                    out.println(new GenereitorHTML().getClient_map(anyparam,displayString));
-                   System.out.println("peticion de servicio 18 ok!");
+                   //System.out.println("peticion de servicio 18 ok!");
                    break;
              
-            case 5:     
-                   System.out.println("atendiendo peticion Servicio 5...  param2=-->" + anyparam);
-                   out.println(new GenereitorHTML().getAnunciosBuscar(anyparam));
-                   System.out.println("peticion de servicio 5 Busqueda ok!");
-                   break;
-                
+           
+             case 20:
+                  //System.out.println("atendiendo peticion Servicio 20...  Version_app=-->" + anyparam);
+                  out.println(new GenereitorHTML().getVersion());
+                  //System.out.println("peticion de servicio 20 ok!");
+                  break;
                 
               default:
                   out.println("peticion de servicio desconosido.");
-                  System.out.println("peticion de servicio desconosido.");
+                  //System.out.println("peticion de servicio desconosido.");
                   break;
            
            }

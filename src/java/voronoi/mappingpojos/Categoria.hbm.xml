@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-abr-2013 14:16:16 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="voronoi.mappingpojos.Categoria" table="categoria" catalog="directel_2012">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="parent" type="int">
+            <column name="parent" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="50" not-null="true" />
+        </property>
+        <property name="imagen" type="string">
+            <column name="imagen" length="50" not-null="true" />
+        </property>
+        <property name="icono" type="string">
+            <column name="icono" length="50" not-null="true" />
+        </property>
+        <property name="secciones" type="string">
+            <column name="secciones" length="1000" not-null="true" />
+        </property>
+        <property name="clics" type="int">
+            <column name="clics" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

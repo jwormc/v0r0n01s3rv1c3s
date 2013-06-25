@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-abr-2013 14:16:16 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="voronoi.mappingpojos.Estados" table="Estados" catalog="directel_2012">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="codigo" type="int">
+            <column name="codigo" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="65535" not-null="true" />
+        </property>
+        <property name="municipio" type="string">
+            <column name="municipio" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
