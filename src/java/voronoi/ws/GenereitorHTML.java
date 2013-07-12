@@ -54,8 +54,10 @@ public class GenereitorHTML {
     
         String ciudades_lis="";
         try{
+            
             Iterator<Ciudad> iterator = new CiudadHelper().getCiudades().iterator();
             while (iterator.hasNext()) {
+                System.out.println("aqui se murio un borreguito");
                     Ciudad city=iterator.next();
                     ciudades_lis+="<li id='"+city.getId() +"' title='"+ city.getNombre()+"' class='ciudad' ><a href='#lista_categorias' >"+ city.getNombre()+"</a></li>";
             }//while
