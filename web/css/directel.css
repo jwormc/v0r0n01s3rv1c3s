@@ -1,0 +1,597 @@
+/*===============================================================================================                                               
+    directel.css
+    =================================
+      CSS 3.0
+
+    RECORD
+    =============================
+
+      DATE            MODIFIED BY                   DESCRIPTION 
+      =============   ===========================   ==========================================              
+      May 06th 2012   Gerardo Hdz. Juan Francisco   CSS creation.
+              
+=================================================================================================*/
+
+/*======================================================================
+   FONDO APP
+ =====================================================================*/
+.ui-page{
+	background-image: url('images/bg.png');
+}
+
+/*======================================================================
+   HEADER
+ =====================================================================*/
+/*Header de la app*/
+.ui-header{
+	
+}
+.header_{
+	position:relative;
+	width:100%;
+	heigth:100%;
+	
+	background-color:#333;
+	
+	-moz-box-shadow: 0 0 0.5em 0.5em #888;
+	-webkit-box-shadow: 0 0 0.5em 0.5em #888;
+	box-shadow: 0 0 0.5em 0.5em #888;
+}
+
+/*Logotipo del header de la app*/
+
+.header_ a{
+	display:block;
+	background: rgba(252,234,187,1);
+	background: -moz-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(252,234,187,1)), color-stop(54%, rgba(252,205,77,1)), color-stop(99%, rgba(248,181,0,1)), color-stop(100%, rgba(251,223,147,1)));
+	background: -webkit-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
+	background: -o-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
+	background: -ms-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
+	background: linear-gradient(to bottom, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=0 );
+	
+	
+	
+	-webkit-border-radius:4.0em 4.0em;
+	-moz-border-radius:4.0em 4.0em;
+	border-radius:4.0em 4.0em;
+	
+	margin:0.5em;
+	margin-left:3em;
+	padding:0;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	
+	width:40%;
+}
+
+.header_logo{
+	display:block;
+	position:relative;
+	left:5%;
+	bottom:0;
+	width:95%;
+	
+	opacity:1;
+	-webkit-transition:all 0.8s ease;
+	-moz-transition:all 0.8s ease;
+	transition:all 0.8s ease;
+	
+}
+
+/*Icono de Configuración de la app*/
+.header_config{
+	display:block;
+	position:absolute;
+	right:1em;
+	bottom:5%;
+	height:70%;
+	
+	
+	opacity:0.8;
+	-webkit-transition:all 0.5s ease;
+	-moz-transition:all 0.5s ease;
+	transition:all 0.5s ease;
+	
+}
+
+/*Logotipo del header de la app al pasar el puntero sobre él*/
+.headerd_logo:active, .header_config:active{
+	opacity:1;
+	-webkit-transform: scale(1.05,1.00);
+	-moz-transform: scale(1.05,1.00);
+	transform: scale(1.05,1.00);
+}
+
+/*======================================================================
+   MENU
+ =====================================================================*/
+ .menu_{
+ 	width:100%;
+ }
+ 
+ .menu_ ul{
+ 	padding:2em;
+ }
+ 
+ /*elemento del menu*/
+ .menu_ ul li{
+ 	width:30%;
+ 	border:0;
+ 	
+ 	-webkit-border-radius:2em;
+ 	-moz-border-radius:2em;
+ 	border-radius:2em;
+ }
+ 
+ /*Primer elemento de menu redondeado*/
+ .menu_ ul li:first-child, .menu_ ul li:first-child a{
+ 	-webkit-border-top-left-radius: 2em;
+ 	-webkit-border-bottom-left-radius: 2em;
+ 	-moz-border-top-left-radius: 2em;
+ 	-moz-border-bottom-left-radius: 2em;
+ 	border-top-left-radius: 2em;
+ 	border-bottom-left-radius: 2em;
+ }
+ 
+ /*último elemento del menu redondeado*/
+  .menu_ ul li:last-child, .menu_ ul li:last-child a{
+  	-webkit-border-top-right-radius: 2em;
+ 	-webkit-border-bottom-right-radius: 2em;
+ 	-moz-border-top-right-radius: 2em;
+ 	-moz-border-bottom-right-radius: 2em;
+ 	border-top-right-radius: 2em;
+ 	border-bottom-right-radius: 2em;
+ }
+ 
+ /*Imagen de cada elemento*/
+ .menu_ ul li a img{
+	width:3em;
+ 	opacity:0.8;
+ 	-webkit-transition:all 0.5s ease;
+	-moz-transition:all 0.5s ease;
+	transition:all 0.5s ease;
+ }
+ 
+  /*Imagen de cada elemento cuando se pasa sobre el*/
+ .menu_ ul li a:hover img{
+ 	opacity:1;
+ 	/*
+ 	-webkit-transform: scale(1.2,1.2);
+	-moz-transform: scale(1.2,1.2);
+	transform: scale(1.2,1.2);
+	*/
+ }
+ /*Imagen de cada elemento despues de activarlo*/
+ .menu_ ul li a img:active{
+ 	opacity:1;
+ 	-webkit-transform: scale(1.4,1.4);
+	-moz-transform: scale(1.4,1.4);
+	transform: scale(1.4,1.4);
+ }
+ 
+
+/*======================================================================
+   CONTENIDO
+ =====================================================================*/
+
+
+/*======================================================================
+   PÁGINA INICIAL
+ =====================================================================*/
+/*Logotipo de la página principal*/
+.init_content img{
+	display:block;
+	margin:5em;
+	margin-left:auto;
+	margin-right:auto;
+	
+	width:70%;
+
+}
+
+/*Contenido de la página principal*/
+.init_content{
+	position:relative;
+	
+	width:80%;
+	heigth:80%;
+	
+	margin-top:auto;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:auto;
+	
+	padding:3em;
+}
+
+/*======================================================================
+  PÁGINA CATEGORÍAS
+ =====================================================================*/
+ /*Listview de las Categorias*/
+ .lista_categorias_{}
+ 
+ .lista_categorias_ img{
+ 	margin:0.5em;
+ 	margin-top:5%;
+ 	margin-bottom:5%;
+ 	height:90%;
+ 	
+
+ }
+ 
+ /*Contenedor del Nombre y Logo de cada categoría*/
+ .header_categoria{
+
+ }
+ 
+ /*Logotipo de cada categoría*/
+ #cat_icon{
+	margin:0;
+	margin-left:2em;
+ 	width:20%;
+ }
+ 
+ /*Nombre de cada categoría*/
+ #cat_name{
+ 	width:40%;
+ 	background-color: #fff;
+ }
+ 
+ 
+ /*======================================================================
+  PÁGINA CLIENTES
+ =====================================================================*/
+ /*Contenedor de la información del cliente*/
+ .client_content{
+ 	position:relative;
+ 	margin-top:0;
+ 	padding-top:0;
+ 	text-transform:none;
+ 	
+ 	font-size:1.2em;
+ 	margin:0;
+ 	padding:0;
+ }
+ /*---------------------------------------------*/
+ /*Contenedor del Logotipo del cliente          */
+ /*---------------------------------------------*/
+ /*Igual que .contact_info, .map_*/
+ .logo_cliente{
+ 	
+ 	margin:0.5em;
+ 	border:0.2em solid #999;
+ 	height:20%;
+ 	
+ 	-webkit-border-radius:1.2em;
+ 	-moz-border-radius:1.2em;
+ 	border-radius:1.2em;
+ 	background-color:#fff;
+ 	
+ 	-webkit-box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+    -moz-box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+    box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+    
+    text-align: center;
+ }
+
+  /*Logotipo del cliente*/
+ .logo_cliente img{
+ 	height:80%;
+	margin:0.6em;
+	
+ 	border: 0.2em solid #999;
+ 	-webkit-border-radius:1.2em;
+ 	-moz-border-radius:1.2em;
+ 	border-radius:1.2em;
+ }
+
+ /*---------------------------------------------*/
+ 
+ /*---------------------------------------------*/
+ /*Contenedor del nombre, dirección y favorito  */
+ /*---------------------------------------------*/
+ .nombre_dir{
+ 	position:relative;
+ 	margin:1em;
+ 	margin-top:0;
+ }
+ 
+ /*Descripción*/
+ .desc_{text-indent:2em;}
+ 
+ /*Titulos h1,h2 y h3 de nombre_dir*/
+ .nombre_dir h1 , .nombre_dir h2 , .nombre_dir h3{
+ 	text-align:left;
+ 	font-weight: bold;
+ 	text-transform:uppercase;
+ }
+ /*Color del Nombre del cliente*/
+ .nombre_dir h2{color:#3b5998;}
+ /*Titulos h1, h2 y h3 con la primera letra más grande*/
+ .nombre_dir h1:first-letter , .nombre_dir h2:first-letter , .nombre_dir h3:first-letter{font-size: 1.2em;}
+ /*---------------------------------------------*/
+ 
+ /*---------------------------------------------*/
+ /*Contenedor de las redes sociales superiores  */
+ /*---------------------------------------------*/
+ /*disabled*/
+ .client_social{
+ 	position:absolute;
+ 	right:0;
+ 	top:0;
+ }
+ /*Imagenes de las redes sociales*/
+ .client_social img{
+ 	width:4.2em;
+ }
+ /*---------------------------------------------*/
+ 
+ 
+ /*---------------------------------------------*/
+ /*Checkbox personalizado de favoritos          */
+ /*---------------------------------------------*/
+ /*Contenedor del control*/
+ .client_fav{
+ 	position:absolute;
+ 	right:0;
+ 	bottom:0;
+ 	height:auto;
+ }
+ 
+ /*Deshabilitamos el checkbox a invisible*/
+.check_fav input[type=checkbox] {
+	display:none;
+	visibility: hidden;
+}
+
+/*Contenedor del checkbox personalizado (fondo)*/
+.check_fav {
+	position: relative;
+	display:inline-block;
+	width: 5em;
+	height: 5em;
+	padding:0;
+	
+	
+	background: #fcfff4;
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+
+	-webkit-border-radius: 1em;
+	-moz-border-radius: 1em;
+	border-radius: 1em;
+
+	-webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+
+}
+
+/*Segundo contenedor (interior)*/
+.check_fav label {
+	 width:4em;
+	 height:4em;
+	 margin:0.5em auto;
+	 padding:0;
+
+	 opacity:1;
+	 
+	 background: #fcfff4;
+	 background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	 background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	 background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	 background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	 background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+	 
+	-webkit-border-radius: 1em;
+	-moz-border-radius: 1em;
+	border-radius: 1em;
+	
+}
+/*Funcionalidad del checkbox a través del label*/
+.check_fav label:after {
+
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width:100%;
+	height:100%;
+	margin:0;
+	top:0;
+	left:0;
+	
+	-webkit-border-radius: 1em;
+	-moz-border-radius: 1em;
+	border-radius: 1em;
+	
+	/*Imagen*/
+	background-image:url('images/fav-checked.png');
+	background-repeat: no-repeat;
+	background-size:80%;
+	background-position:center; 
+	
+}
+
+/*favoritos hover*/
+.check_fav label:hover::after {opacity:0.6;}
+
+/*favoritos checked*/
+.check_fav input[type=checkbox]:checked + label:after {opacity: 1;}
+
+/*Dejarlas sino aparece una barra | imposible de quitar*/
+.check_fav .ui-btn-text{display:none;}
+.check_fav .ui-btn-inner{display:none;}
+ /*---------------------------------------------*/
+
+
+
+ /*---------------------------------------------*/
+ /*Información de contacto y mapa               */
+ /*---------------------------------------------*/
+ 
+ /*Borde de los contenedores del mapa y la info*/
+ .contact_info, .map_{
+ 	margin:0.5em;
+ 	border:0.2em solid #999;
+ 	
+ 	-webkit-border-radius:1.2em;
+ 	-moz-border-radius:1.2em;
+ 	border-radius:1.2em;
+ 	background-color:#fff;
+ 	
+ 	-webkit-box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+    -moz-box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+    box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+ }
+ 
+ /*Borde inferior (separadora) entre la información de contacto*/
+ .telefonos_ ,.horario_, .webs_, .web_b{
+ 	border:0;
+ 	border-bottom: 0.2em solid #999;
+ }
+ 
+ /*Contenedores de las categorías (telefonos, horario, web, email)*/
+ .telefonos_ ,.horario_ , .webs_, .web_b, .email_{
+ 	padding:1em;
+ 	min-height: 3em;
+ }
+ 
+ /*Imagenes de las categorías de la información*/
+ .telefonos_ img,.horario_ img,.webs_ img, .web_b img, .email_ img{
+ 	float:left;
+ 	width:3em;
+ }
+ 
+ /*Etiqueta que indica el tipo de teléfono, horario o tipo de enlace (izquierda)*/
+ .contact_tag{
+ 	float:left;
+ 	margin-left:1em;
+ 	font-weight: bold;
+
+ }
+ 
+ /*Información de cada elemento telefono, horario, web (derecha)*/
+ .telefonos_list, .horario_list, .email_list, .web_list_b{
+ 	margin-top:1.2em;
+ 	margin-left:0em;
+ 	width:auto;
+ 	text-align:right;
+
+ }
+ 
+  /*Horario y webs bajo su nombre*/
+ .horario_list, .webs_list{text-align:left; clear:both;}
+ .horario_list{margin-left:2em;}
+ 
+ /*los enlaces url son en minusculas*/
+ .web_list_a,.web_list_b, .email_list{text-transform:lowercase;}
+ 
+ /*Enlaces web tipo 'a'*/
+ .webs_list{margin-left:3em;}
+ 
+ /*Cada enlace web tipo 'a'*/
+ .web_a{
+ 	display:block;
+ 	width:100%;
+ 	
+ }
+ 
+ /*Imagenes de enlaces web tipo 'a'*/
+ .web_a img{
+ 	float:none;
+ 	width:3em;
+ }
+ /*Enlace en si tipo 'a'*/
+ .web_a .link{
+ 	position:relative;
+ 	top:-1em;
+ 	width:auto;
+}
+ 
+ /*Enlace*/
+ 
+ /*Imagen del mapa*/
+ .map_{
+ 	overflow:auto;
+ }
+ .map_ img{
+ 	margin:1.2em;
+ 	margin-left:2%;
+ 	margin-right:2%;
+ 	border-radius:1.2em;
+	width:96%;
+ }
+ 
+ /*Texto de enlaces y teléfonos*/
+ .telefonos_list, .email_list, .web_list_b, .web_list_a{
+ 	text-decoration: none;
+ 	font-size: 1.3em;
+ 	color:#1c3cc9;
+ }
+ 
+ /*Texto de enlaces y teléfonos*/
+ .telefonos_list a, .email_list a, .web_list_b a, .web_list_a a{
+ 	text-decoration: none;
+ 	color:#1c3cc9;
+ }
+  /*Texto de enlaces y teléfonos hover*/
+  .telefonos_list a:hover, .email_list a:hover, .web_list_b a:hover, .web_list_a a:hover{
+ 	text-decoration: none;
+ 	color:#1c3cc9;
+ }
+  /*Texto de enlaces y teléfonos visitados*/
+  .telefonos_list a:visited, .email_list a:visited, .web_list_b a:visited, .web_list_a a:visited{
+ 	text-decoration: none;
+ 	color:#1c3cc9;
+ }
+ 
+ /*Telefonos*/
+ .telefonos_list {font-weight: bold;}
+ 
+ /*enlaces mas pequeños*/
+ .web_list_b a, .web_list_a a{font-size:0.8em;}
+ .email_list a{font-size:0.8em;}
+ 
+ /*---------------------------------------------*/
+ 
+ /*======================================================================
+  PÁGINA CLIENTES
+ =====================================================================*/
+ .content_map{
+	 margin:0;
+	 padding:0;
+ }
+ /*Borde de los contenedores del mapa*/
+.map_ext{
+ 	margin:0.2em;
+ 	border:0.2em solid #999;
+ 	overflow:auto;
+ 	
+ 	-webkit-border-radius:1.2em;
+ 	-moz-border-radius:1.2em;
+ 	border-radius:1.2em;
+ 	background-color:#fff;
+ 	
+ 	-webkit-box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+    -moz-box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+    box-shadow:0 0 0.8em #777, 0 0 1.8em #CCC inset;
+ }
+
+/*Imagen del mapa*/
+ .map_ext img{
+ 	margin:1%;
+ 	border-radius:1.2em;
+	width:98%;
+ }
+ 
+ 
+ 
+ 
+ 
