@@ -26,7 +26,7 @@ public class CategoriaHelper {
     List<Categoria> actorList = null;
     try {
         org.hibernate.Transaction tx = session.beginTransaction();
-        Query q = session.createQuery ("from Categoria");
+        Query q = session.createQuery ("from Categoria ORDER BY nombre");
         actorList = (List<Categoria>) q.list();
 
         } catch (Exception e) {
