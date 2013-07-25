@@ -40,8 +40,9 @@
 
 /*Logotipo del header de la app*/
 
-.header_ a{
+.header_ {
 	display:block;
+	/*
 	background: rgba(252,234,187,1);
 	background: -moz-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
 	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(252,234,187,1)), color-stop(54%, rgba(252,205,77,1)), color-stop(99%, rgba(248,181,0,1)), color-stop(100%, rgba(251,223,147,1)));
@@ -50,9 +51,9 @@
 	background: -ms-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
 	background: linear-gradient(to bottom, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 54%, rgba(248,181,0,1) 99%, rgba(251,223,147,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=0 );
+	*/
 	
-	
-	
+	/*
 	-webkit-border-radius:4.0em 4.0em;
 	-moz-border-radius:4.0em 4.0em;
 	border-radius:4.0em 4.0em;
@@ -63,7 +64,22 @@
 	padding-top:0.5em;
 	padding-bottom:0.5em;
 	
-	width:40%;
+	width:40%;*/
+	
+	background:rgba(252,234,187,1);
+}
+.header_ a{
+	
+}
+
+.logo_container{
+	display:block;
+	width:100%;
+	height:97%;
+	background: rgba(250,250,250,1);
+	
+	border-bottom-right-radius: 2em 2em;
+	border-bottom: 0.5em solid rgba(248,181,0,1);
 }
 
 .header_logo{
@@ -71,7 +87,7 @@
 	position:relative;
 	left:5%;
 	bottom:0;
-	width:95%;
+	width:70%;
 	
 	opacity:1;
 	-webkit-transition:all 0.8s ease;
@@ -221,6 +237,13 @@
 
  }
  
+ #lista_categorias .categoria p{
+ 	
+ }
+ 
+ /*======================================================================
+  PÁGINA CATEGORÍA
+ =====================================================================*/
  /*Contenedor del Nombre y Logo de cada categoría*/
  .header_categoria{
 
@@ -239,6 +262,52 @@
  	background-color: #fff;
  }
  
+ /*Anuncio*/
+ .listadeclientes{
+
+  }
+  
+.listadeclientes a{
+  padding: 0;
+  }
+  
+/*Titulo del Anuncio*/
+ .listadeclientes h3{
+	/*border:1px solid aqua;*/
+	position:relative;
+	left:-0.5em;
+	width:100%;
+ }
+ 
+ .listadeclientes p{
+ 	width:auto;
+ }
+ 
+ /*Descripcion*/
+ .listadeclientes .desc{
+ 	position:relative;
+	left:-0.5em;
+ 	width:auto;
+ }
+ 
+ /*Colonia*/
+ .listadeclientes .col-aside{
+ 	position:absolute;
+ 	bottom:0.2em;
+ 	right:1.0em;
+ 	
+ 	font-style: italic;
+ }
+ 
+ .listadeclientes .ui-btn-text{
+ 	
+ }
+ 
+ .listadeclientes .ui-link-inherit{
+ 	margin:0;
+ 	padding:0;
+ 	
+ }
  
  /*======================================================================
   PÁGINA CLIENTES
@@ -262,7 +331,7 @@
  	
  	margin:0.5em;
  	border:0.2em solid #999;
- 	height:20%;
+ 	height:8em;
  	
  	-webkit-border-radius:1.2em;
  	-moz-border-radius:1.2em;
@@ -335,7 +404,7 @@
  /*Contenedor del control*/
  .client_fav{
  	position:absolute;
- 	right:0;
+ 	right:1em;
  	bottom:0;
  	height:auto;
  }
@@ -350,8 +419,8 @@
 .check_fav {
 	position: relative;
 	display:inline-block;
-	width: 5em;
-	height: 5em;
+	width: 4em;
+	height: 4em;
 	padding:0;
 	
 	
@@ -375,8 +444,8 @@
 
 /*Segundo contenedor (interior)*/
 .check_fav label {
-	 width:4em;
-	 height:4em;
+	 width:3em;
+	 height:3em;
 	 margin:0.5em auto;
 	 padding:0;
 
@@ -591,7 +660,24 @@
 	width:98%;
  }
  
+ /*======================================================================
+    FAVORITOS
+ =====================================================================*/
+ /*Titulo de los Favoritos*/
+ .fav_title{
+
+ 	width:100%;
+ 	
+ }
+ .fav_title:first-letter{
+ 	font-size: 1.1em;
+ }
  
+ .center{
+  	margin-left:auto;
+ 	margin-right:auto;
+ 	text-align:center;
+ }
  
  
  

@@ -1,0 +1,121 @@
+/*===============================================================================================                                               
+    iphone.css
+    =================================
+      CSS 3.0
+
+    RECORD
+    =============================
+
+      DATE            MODIFIED BY                   DESCRIPTION 
+      =============   ===========================   ==========================================              
+      Jul 24th 2012   Gerardo Hdz. Juan Francisco   CSS creation.
+              
+=================================================================================================*/
+
+.header_{
+    border:0;
+    margin:0;
+    padding:0;
+    
+    position:absolute;
+    top:10px;
+    left:10px;;
+    
+    
+    width: 591px;
+    height: 183px;
+    
+    background-image: url('images/ip_header.png');
+    background-repeat: no-repeat;
+}
+
+.left_{
+    border:0;
+    margin:0;
+    padding:0;
+    
+    position:absolute;
+    top:193px;
+    left:9px;;
+    
+    width: 50px;
+    height: 889px;
+    
+    background-image: url('images/ip_left.png');
+    background-repeat: no-repeat;
+}
+
+.right_{
+    border:0;
+    margin:0;
+    padding:0;
+    
+    position:absolute;
+    top:193px;
+    left:557px;;
+    
+    width: 50px;
+    height: 889px;
+    
+    background-image: url('images/ip_right.png');
+    background-repeat: no-repeat;
+    
+}
+
+.footer_{
+    border:0;
+    margin:0;
+    padding:0;
+    
+    position:absolute;
+    top:1082px;
+    left:14px;;
+    
+    width: 587px;
+    height: 174px;
+    
+    background-image: url('images/ip_footer.png');
+    background-repeat: no-repeat;
+    
+}
+
+.app_{
+    border:0;
+    margin:0;
+    padding:0;
+    
+    position:absolute;
+    top:193px;
+    left:59px;
+    
+    width:500px;
+    height: 900px;
+    
+    background-color: #f00;
+}
+
+.out{
+    margin-left: auto;
+    margin-right: auto;
+    
+    width: 500px;
+    height: 880px;
+    
+    background-image: url('images/iphone5.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+
+.in{
+    position:relative;
+    top:153px;
+    left:85px;
+    
+    width:324px;
+    height: 560px;
+    
+    /*background: rgba(255,0,0,0.5);*/
+    
+}
+

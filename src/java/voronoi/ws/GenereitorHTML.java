@@ -167,9 +167,9 @@ public class GenereitorHTML {
         Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByKeywords(keywords,city).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h2>"+ anuncio.getNombre() +"</h2>"
-                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
-                                     + "<p class='ui-li-aside'><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h3>"+ anuncio.getNombre() +"</h3>"
+                                     + "<p class='desc'><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class='ui-li-aside'><strong class='col-aside'>"+anuncio.getColonia()+"</strong></p></a></li>";
                 }
                      
     return anuncios_lis;

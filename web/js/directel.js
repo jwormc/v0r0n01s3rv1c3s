@@ -432,65 +432,66 @@ function put_catIcon(){
 	switch(categoria_actual){
 		case "apoyos_financieros":
 			  //color = "#7f5e3f";
-			  color = "#805e3d";
+			  color = "#855333";
 			  break;
 		case "automotriz":
 			  //color = "#a32431";
-			  color = "#a6262e";
+			  color = "#bf1b2c";
 			  break;
 		case "construccion":
 			  //color = "#e9ae4a";
-			  color = "#ebb042";
+			  color = "#f9a72b";
 			  break;
 		case "deporte":
 			  //color = "#cf4239";
-			  color = "#d34435";
+			  color = "#1969bc";
 			  break;
 		case "educacion":
 			  //color = "#ca0088";
-			  color = "#ce2689";
+			  color = "#ec008c";
 			  break;
 		case "gobiernos":
 			  //color = "#7d2b8b";
-			  color = "#7f278c";
+			  color = "#82147c";
 			  break;
 		case "hogar":
 			  //color = "#9fc54d";
-			  color = "#9ec646";
+			  color = "#80cc28";
 			  break;
 		case "medios_e_imagen":
 			  //color = "#39673e";
-			  color = "#37673c";
+			  color = "#1d6434";
 			  break;
 		case "industria":
 			  //color = "#6e6659";
-			  color = "#6e6758";
+			  color = "#6a5e50";
 			  break;
 		case "oficinas":
 			  //color = "#882461";
-			  color = "#8a2362";
+			  color = "#9a0346";
 			  break;
 		case "profesionistas":
 			  //color = "#5aa69d";
-			  color = "#55a69d";
+			  color = "#37ab9c";
 			  break;
 		case "recreacion_y_eventos_sociales":
 			  //color = "#cc2229";
-			  color = "#cf2624";
+			  color = "#ed1c24";
 			  break;
 		case "salud_y_belleza":
 			  //color = "#00acec";
-			  color = "#00aaee";
+			  color = "#00adef";
 			  break;	  
 		case "servicios_generales":
 			  //color = "#f2ca3c";
-			  color = "#f4cc2c";
+			  color = "#f57a14";
 			  break;
 	}//switch
 	
+	//color = "#ffffff";
 	document.getElementById('header_categoria').style.backgroundColor = color; 
-	//document.getElementById('cat_name').style.backgroundColor = color; 
-	//document.getElementById('cat_icon').style.backgroundColor = color; 
+	document.getElementById('cat_name').style.backgroundColor = color; 
+	document.getElementById('cat_icon').style.backgroundColor = color; 
 	
 	
 }//function put_catIcon
