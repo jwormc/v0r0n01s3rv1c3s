@@ -182,9 +182,9 @@ public class GenereitorHTML {
         Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosByREGEX(s).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h2>"+ anuncio.getNombre() +"</h2>"
-                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
-                                     + "<p class='ui-li-aside'><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h3>"+ anuncio.getNombre() +"</h3>"
+                                     + "<p class='desc'><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class='ui-li-aside'><strong class='col-aside'>"+anuncio.getColonia()+"</strong></p></a></li>";
                 }
                 
                  System.out.println("Lista de Anuncios Li OK!");
@@ -648,9 +648,9 @@ public class GenereitorHTML {
         Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosFavoritos(s).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_favors+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
-                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
-                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                        anuncios_favors+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h3>"+ anuncio.getNombre() +"</h3>"
+                                     + "<p class='desc'><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class='ui-li-aside'><strong class='col-aside'>"+anuncio.getColonia()+"</strong></p></a></li>";
                 }
                 
                  System.out.println("Lista de Favoritos Li OK!");
@@ -669,9 +669,9 @@ public class GenereitorHTML {
         Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosBusqueda(s).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h2>"+ anuncio.getNombre() +"</h2>"
-                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
-                                     + "<p class=\"ui-li-aside\"><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                        anuncios_lis+="<li id=\""+anuncio.getId() +"\"  class=\"listadeclientes\"  title=\""+ anuncio.getShortD() +"\" ><a href=\"#cliente\"> <h3>"+ anuncio.getNombre() +"</h3>"
+                                     + "<p class='desc'><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class='ui-li-aside'><strong class='col-aside'>"+anuncio.getColonia()+"</strong></p></a></li>";
                 }
                 
                  System.out.println("Lista de Anuncios Li OK!");
@@ -696,9 +696,9 @@ public class GenereitorHTML {
             Iterator<Anuncio> iterator = new AnuncioHelper().getAnunciosSearch(keyword,city).iterator();
                 while (iterator.hasNext()) {
                         Anuncio anuncio=iterator.next();
-                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h2>"+ anuncio.getNombre() +"</h2>"
-                                     + "<p><strong>"+anuncio.getDescripcion()+"</strong></p> "
-                                     + "<p class='ui-li-aside'><strong>"+anuncio.getColonia()+"</strong></p></a></li>";
+                        anuncios_lis+="<li id='"+anuncio.getId() +"'  class='listadeclientes'  title='"+ anuncio.getShortD() +"' ><a href='#cliente'> <h3>"+ anuncio.getNombre() +"</h3>"
+                                     + "<p class='desc'><strong>"+anuncio.getDescripcion()+"</strong></p> "
+                                     + "<p class='ui-li-aside'><strong class='col-aside'>"+anuncio.getColonia()+"</strong></p></a></li>";
                 }//while
                 
 
